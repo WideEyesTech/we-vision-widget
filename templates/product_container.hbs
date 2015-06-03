@@ -1,0 +1,17 @@
+<li class="we-product-container element">
+  <a href="{{this.ProductUrl}}">
+    <img class="productsImage" src="{{this.ImgUrls.[0]}}">
+  </a>
+  <a class="productsNameText" href="{{this.ProductUrl}}">{{this.ProductName}}</a>
+  {{#if this.ProductCustomData.description}}
+     <div class="productDescription">
+       {{this.ProductCustomData.description}}
+     </div>
+   {{/if}}
+  {{#if this.ProductCustomData.price}}
+     <div class="productDescription">
+       <div class="price">{{this.ProductCustomData.price}} &euro;</div>
+     </div>
+   {{/if}}
+  
+</li>
