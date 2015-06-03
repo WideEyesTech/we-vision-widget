@@ -1,4 +1,4 @@
-WE Vision Widget - The We Vision JavaScript Widget
+WE Vision Widget - WideEyes We Vision JavaScript Widget
 ==============
 
 A library to dinamically generate a widget that can be embedded in a website and connect to our [web services](http://docs.wide-eyes.it) to retrieve search results.
@@ -23,7 +23,7 @@ Install and configure
 #### Source Code
 
 ```sh
-  git clone <url_of_repository>
+  git clone https://github.com/WideEyesTech/we-vision-widget
   npm install
 ```
 
