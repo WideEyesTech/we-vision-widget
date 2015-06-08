@@ -68,6 +68,10 @@ Our styles are rendered from a handlebars template that live in templates folder
 Take a look to this file, you will see how we reset the styles to apply to our widget.
 You can modify this file as you will to make your widget get the look that you want.
 
+#### Build
+
+```npm run build``` (generates build/main.js)
+
 
 Quick Start
 -------------
