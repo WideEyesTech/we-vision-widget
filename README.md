@@ -153,7 +153,7 @@ Development process
   1. ```npm run dev``` (generates js/we-widget.js)
   2. Copy the snippet included in [Quick Start](#quick-start) selecting mode "debug", deleting/commenting the production script and uncommenting the debug scripts
 3. Build for production: 
-  1.```npm run build``` (generates build/main_internal and main_external.js)
+  1. ```npm run build``` (generates build/main_internal and main_external.js)
   2. Copy the snippet included in [Quick Start](#quick-start) selecting mode "production", deleting/commenting the debug scripts and uncommenting the production script
 
 Contributing
