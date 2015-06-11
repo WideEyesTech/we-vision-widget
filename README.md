@@ -113,7 +113,7 @@ Quick Start
       {
         "apikey": "b29da1968414512ea4c3b833609469c278ec9f52",
         "numberOfElements": 16, // number of elements to retrieve from API
-        "widgetPositionAfter":"#widget", // widget container identifier
+        "widgetPositionAfter":"#widget", // widget container
         "type": {
           'font-family': "'Helvetica Neue', Helvetica, Arial, sans-serif",
           'font-size': 16,
@@ -131,20 +131,30 @@ Quick Start
           "hasDescription": true,
           'hasPrice' : true
         },
-        "mode": "debug" // default is production
+        "mode": "production" // default is production
       };
   </script>
+
+  <!-- production script -->
   <script id="we-widget-script" src="build/main_external.min.js"></script>
+
+  <!-- debug scripts -->
+  <script src="js/vendor/iframe-resizer/src/iframeResizer.js"></script>
+  <script id="we-widget-script" src="js/we-widget.js"></script>
 ```
+IMPORTANT: Remember to comment or uncomment the production or debug scripts depending on the mode you are working on.
 
 
 Development process
 --------------------
 
 1. Install dependencies: ```npm install```
-2. Run watcher & server: ```npm run dev```
-3. Build for production: ```npm run build``` (generates build/main.js)
-
+2. Run watcher & server: 
+  1. ```npm run dev```
+  2. Copy the snippet included in [Quick Start](#quick-start) selecting mode "debug", deleting/commenting the production script and uncommenting the debug scripts
+3. Build for production: 
+  1.```npm run build``` (generates build/main_internal and main_external.js)
+  2. Copy the snippet included in [Quick Start](#quick-start) selecting mode "production", deleting/commenting the debug scripts and uncommenting the production script
 
 Contributing
 -----------------

@@ -43,9 +43,15 @@
           "hasDescription": true,
           'hasPrice' : true
         },
-        "mode": "debug" // default is production
+        "mode": "production" // default is production
       };
   </script>
+
+  <!-- production script -->
   <script id="we-widget-script" src="build/main_external.min.js"></script>
+
+  <!-- debug scripts -->
+    <script src="js/vendor/iframe-resizer/src/iframeResizer.js"></script>
+  <script id="we-widget-script" src="js/we-widget.js"></script>
   </body>
 </html>

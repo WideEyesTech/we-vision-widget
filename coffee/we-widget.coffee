@@ -18,9 +18,6 @@ req.addEventListener 'readystatechange', ->
 		response = JSON.parse(req.responseText)
 		response.result_both.splice 0, 2
 
-		# have to be stringified so to pass them to the html string
-		response = JSON.stringify response 
-		config = JSON.stringify(config)
 
 		iframe = document.createElement 'iframe'
 		iframe.setAttribute 'width', '100%'
@@ -32,23 +29,49 @@ req.addEventListener 'readystatechange', ->
 		widget = document.getElementById 'widget'
 		widget.appendChild iframe
 		
-		html = 
-			'<!DOCTYPE html>
-			<html>
-				<head>
-				    <script>
-				    	var products = '+response+';
-						var config = '+config+';
-						var product_id = "'+product_id+'";
-				    </script>
-					<link rel="stylesheet" href="'+scriptSrc+'/main.min.css">
-					<base target="_blank"/>
-				</head>
-				<body>
-					<section id="widget"></section>
-					<script src="'+scriptSrc+'/main_internal.min.js"></script>
-				</body>
-			</html>'
+		if config.mode == 'debug'
+			# have to be stringified so to pass them to the html string
+			response = JSON.stringify response 
+			config = JSON.stringify(config)
+			html = 
+				'<!DOCTYPE html>
+				<html>
+					<head>
+					    <script>
+					    	var products = '+response+';
+							var config = '+config+';
+							var product_id = "'+product_id+'";
+					    </script>
+						<link rel="stylesheet" href="'+scriptSrc+'/css/main.css">
+						<base target="_blank"/>
+					</head>
+					<body>
+						<section id="widget"></section>
+						<script src="'+scriptSrc+'/vendor/requirejs/require.js"></script>
+						<script src="'+scriptSrc+'/vendor/iframe-resizer/src/iframeResizer.contentWindow.js"></script>
+						<script src="'+scriptSrc+'/main.js"></script>
+					</body>
+				</html>'
+		else if config.mode == 'production' or !config.mode
+			response = JSON.stringify response 
+			config = JSON.stringify(config)
+			html = 
+				'<!DOCTYPE html>
+				<html>
+					<head>
+					    <script>
+					    	var products = '+response+';
+							var config = '+config+';
+							var product_id = "'+product_id+'";
+					    </script>
+						<link rel="stylesheet" href="'+scriptSrc+'/main.min.css">
+						<base target="_blank"/>
+					</head>
+					<body>
+						<section id="widget"></section>
+						<script src="'+scriptSrc+'/main_internal.min.js"></script>
+					</body>
+				</html>'
 
 		# copy html to iframe
 		iframe.contentWindow.document.open()
