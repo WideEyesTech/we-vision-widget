@@ -7,7 +7,9 @@
     "postinstall": "node_modules/.bin/bower install",
     "start": "npm run build && npm run serve",
     "dev": "node start-dev.js",
-    "build": "node watch.js once && node_modules/.bin/r.js -o baseUrl=js mainConfigFile=js/main.js name=main out=build/main.js paths.requireLib=vendor/requirejs/require include=requireLib",
+    "external-build": "uglifyjs --compress --mangle --output build/main_external.min.js js/we-widget.js js/vendor/iframe-resizer/src/iframeResizer.js",
+    "internal-build": "node watch.js once && node_modules/.bin/r.js -o baseUrl=js mainConfigFile=js/main.js name=main out=build/main.js paths.requireLib=vendor/requirejs/require include=requireLib && uglifyjs --compress --mangle --comments --output build/main_internal.min.js build/main.js js/vendor/iframe-resizer/src/iframeResizer.contentWindow.js && rm build/main.js && cleancss -o build/main.min.css js/css/*",
+    "build": "npm run external-build && npm run internal-build",
     "build-debug": "node watch.js once && node_modules/.bin/r.js -o baseUrl=js mainConfigFile=js/main.js name=main out=build/main_debug.js paths.requireLib=vendor/requirejs/require include=requireLib optimize=none",
     "serve": "node server.js"
   },
@@ -19,6 +21,7 @@
     "handlebars": "2.0.0",
     "node-static": "0.7.6",
     "node-watch": "0.3.4",
-    "requirejs": "2.1.15"
+    "requirejs": "2.1.15",
+    "clean-css": "~3.3.1"
   }
 }

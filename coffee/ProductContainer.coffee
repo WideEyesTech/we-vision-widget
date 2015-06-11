@@ -11,7 +11,7 @@ define (require) ->
       'click a': '_onClick'
 
     initialize: (options)->
-      @widget_configuration = options.widget_configuration
+      @config = options.widget_configuration
       @product_id = options.product_id
       @
 
@@ -19,13 +19,14 @@ define (require) ->
       if @template
         @setElement @template @_getTemplateData()
         @$el.addClass '' # Add hidden class since we'll be making transition-in to visible
+        # TODO: add col classes depending on columncount
       super
       @
 
     _onClick: ->
       # call statistics/registerClick
       headers = {}
-      headers.apikey = @widget_configuration.apikey
+      headers.apikey = @config.apikey
       $.ajax
         method: "POST",
         url: "http://api.wide-eyes.it/widget/clicks",
@@ -38,7 +39,7 @@ define (require) ->
         processData: false
         error: (error) =>
           console.log(error)
-        success: (response)=>
+        success: (response) =>
         
     _getTemplateData: ->
       @model

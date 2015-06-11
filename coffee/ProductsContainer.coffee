@@ -4,7 +4,6 @@ define (require) ->
   $ = require 'jquery'
   _ = require 'underscore'
   ProductContainer = require 'ProductContainer'
-  
 
   class ProductsContainer extends Backbone.View
     template: require 'templates/products_container'
@@ -27,8 +26,6 @@ define (require) ->
           product_id: @product_id
           widget_configuration: @widget_configuration
         @$el.append prc.render().el
-      # call impressions
-      @_finishImpression()
       super
       @
       
@@ -38,30 +35,4 @@ define (require) ->
       true
         
     _getTemplateData: ->
-      {products: @model}
-      
-    _finishImpression: ->
-
-      if window.wide_eyes_config
-        if window.wide_eyes_config.mode
-          if window.wide_eyes_config.mode == 'debug'
-            console.log('Impression finished')
-            console.timeEnd("WideEyesWidget")
-      # make api call
-      headers = {}
-      headers.apikey = @widget_configuration.apikey
-
-      $.ajax
-        method: "POST",
-        url: "http://api.wide-eyes.it/widget/impressions",
-        data: '{}'
-        dataType: 'json'
-        contentType: 'application/json; charset=UTF-8'
-        headers: 
-          headers
-        crossDomain: true
-        processData: false
-        error: (error) =>
-          console.log(error)
-        success: (response)=>
-      
+      {products: @model}      

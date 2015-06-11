@@ -19,12 +19,12 @@ define (require) ->
       if @template
         @setElement @template @_getTemplateData()
         @$el.addClass '' # Add hidden class since we'll be making transition-in to visible
-      products_container = new ProductsContainer
-        model: @products
-        product_id: @product_id
-        widget_configuration: @widget_configuration
-      @$el.append products_container.render().el
-      
+      for row in @rows
+        products_container = new ProductsContainer
+          model: row
+          product_id: @product_id
+          widget_configuration: @widget_configuration
+        @$el.append products_container.render().el
       super
       @
       
@@ -35,48 +35,66 @@ define (require) ->
       callback()
       
     _extractModelData: ->
-      results = @_filterProductFromVisionResults(@model.toJSON(), @product_id)
-      parsed_results = @_parseVisionResults(results)
-      for element,index in parsed_results
-        if element.ProductCustomData != ''
-          if element.ProductCustomData.price
-            element.ProductCustomData.price = element.ProductCustomData.price.toFixed(2)
-          if (element.ProductCustomData.original_image)
-            element.ImgUrls[0] = element.ProductCustomData.original_image
-      @products = parsed_results
+      results = products
+      parsed_results = @_parseVisionResults results
+      
+      itemCount = config.layout.columnCount || 4
+      parsed_results = @_chunkData parsed_results, itemCount
+      @rows = parsed_results
+      
+    _chunkData: (arr, size) ->
+      newArr = []
+      for item, i in arr by size
+        newArr.push (arr.slice i, i+size)
+      newArr
       
     # Get the array of results from the api results
     _parseVisionResults: (results) ->
       list = []
       i = 0
       while i < results.result_both.length
-        if i >= @widget_configuration.numberOfElements
+        if i >= @widget_configuration.layout.itemCount
           break
         list = list.concat(results.result_both[i])
         i++
+      
+      # if empty then the shape array
       if results.result_both.length == 0
-        # if empty then the shape array
         i = 0
         while i < results.result_shape.length
-          if i >= @widget_configuration.numberOfElements
+          if i >= @widget_configuration.layout.itemCount
             break
           list = list.concat(results.result_shape[i])
           i++
+      
+      # if empty then the color array
       if results.result_both.length == 0 and results.result_shape.length == 0
-        # if empty then the color array
         i = 0
         while i < results.result_color.length
-          if i >= @widget_configuration.numberOfElements
+          if i >= @widget_configuration.layout.itemCount
             break
           list = list.concat(results.result_color[i])
           i++
       i = 0
+
       while i < list.length
+        if !config.tile.hasImage
+          delete list[i].ImgUrls
+        if !config.tile.hasTitle
+          delete list[i].ProductName
         if (typeof(list[i].ProductCustomData)=="string")
           if (list[i].ProductCustomData == '')
             list[i].ProductCustomData = ''
           else
-            list[i].ProductCustomData = JSON.parse(list[i].ProductCustomData) 
+            list[i].ProductCustomData = JSON.parse(list[i].ProductCustomData)
+            if !config.tile.hasDescription
+               delete list[i].ProductCustomData.description
+            if !config.tile.hasPrice
+              delete list[i].ProductCustomData.price
+            else 
+              list[i].ProductCustomData.price = list[i].ProductCustomData.price.toFixed(2)
+
+            
         i++
       list
       
@@ -101,6 +119,6 @@ define (require) ->
           return true
       )
       res
-
-    _getTemplateData: ->
-      {products: @products}
+    
+    _getTemplateData: -> 
+      {products : @rows}
