@@ -56,27 +56,27 @@ See our [example](example.html) to see how you should do it.
  * **widgetPositionAfter**: The CSS Selector of the element after which will be placed the widget.
  * **type**: Custom font styling
   * **font-family**: String of the font-family set to be applied to the widget
-   * **options**: String with any valid font-family set 
-   * **value**: All valid font-family sets (default = "'Helvetica Neue', Helvetica, Arial, sans-serif")
+     * **options**: String with any valid font-family set 
+     * **value**: All valid font-family sets (default = "'Helvetica Neue', Helvetica, Arial, sans-serif")
   * **font-size**: Font size to be applied within the widget
-   * **options**: Integer with a valid font size
-   * **value**: Integer with a valid font size (default = 16)
+     * **options**: Integer with a valid font size
+     * **value**: Integer with a valid font size (default = 16)
   * **color**: Font color to be applied within the widget
-   * **options**: String with any valid color value in hexadecimal, rgb or rgba notation
-   * **value**: Any valid value in hexadecimal, rgb or rgba notation (default = "#333")
+     * **options**: String with any valid color value in hexadecimal, rgb or rgba notation
+     * **value**: Any valid value in hexadecimal, rgb or rgba notation (default = "#333")
  * **layout**: The layout of the widget.
   * **columnCount**: The number of columns of the widget.
-   * **options**: Legal options for the number of columns in the widget.
-   * **value**: The actual number of columns that the widget is configured to have.
+     * **options**: Legal options for the number of columns in the widget.
+     * **value**: The actual number of columns that the widget is configured to have.
   * **mobileColumnCount**: The number of columns of the widget when in mobile.
-   * **options**: Legal options for the number of columns in mobile.
-   * **value**:The actual number of columns that the widget is configured to have in mobile.
+     * **options**: Legal options for the number of columns in mobile.
+     * **value**:The actual number of columns that the widget is configured to have in mobile.
   * **itemCount**: The number of elements per page (in case of pagination). 
-   * **options**: Legal options for the number of elements in the page.
-   * **value**: The actual configuration of the number of elements in the page.
+     * **options**: Legal options for the number of elements in the page.
+     * **value**: The actual configuration of the number of elements in the page.
   * **isCentered**: Choose if the grid of products should be centered relative to the viewport, or not. 
-   * **options**: boolean value (true or false).
-   * **value**: true or false (default = false).
+     * **options**: boolean value (true or false).
+     * **value**: true or false (default = false).
  * **tile**: The configuration for each of the elements in the widget.
   * **hasImage**: The element should have an Image?.
   * **hasTitle**: The element should have a Title?.
