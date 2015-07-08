@@ -1,3 +1,4 @@
+console.log products
 require.config
   baseUrl: 'js'
   map:
