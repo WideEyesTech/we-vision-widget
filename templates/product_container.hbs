@@ -1,17 +1,30 @@
-<li class="we-product-container element">
-  <a href="{{this.ProductUrl}}">
-    <img class="productsImage" src="{{this.ImgUrls.[0]}}">
-  </a>
-  <a class="productsNameText" href="{{this.ProductUrl}}">{{this.ProductName}}</a>
-  {{#if this.ProductCustomData.description}}
-     <div class="productDescription">
-       {{this.ProductCustomData.description}}
-     </div>
-   {{/if}}
-  {{#if this.ProductCustomData.price}}
-     <div class="productDescription">
-       <div class="price">{{this.ProductCustomData.price}} &euro;</div>
-     </div>
-   {{/if}}
-  
-</li>
+<div class="card">
+  <div class="inner">
+    {{#if this.ImgUrls}}
+    <section class="image-container">
+      <a href="{{this.ProductUrl}}">
+        <img class="productsImage" src="{{this.ImgUrls.[0]}}">
+      </a>
+      {{!-- {{#if this.ProductCustomData.description}}
+      <section class="hover-all text-center product-description">
+        <p>
+          <small>{{this.ProductCustomData.description}}</small>
+        </p>
+      </section>
+      {{/if}} --}}
+    </section>
+    {{/if}}
+    <article class="text-xs-center text-md-left">
+      <header>
+        {{#if this.ProductName}}
+        <h4 class="product-title bold">
+          {{this.ProductName}}
+        </h4>
+        {{/if}}
+      </header>
+      {{#if this.ProductCustomData.price}}
+       <p>{{this.ProductCustomData.price}} &euro;</p>
+      {{/if}}
+    </article>
+  </div>
+</div>
