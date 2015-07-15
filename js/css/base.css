@@ -1,0 +1,17 @@
+/* 
+	***************
+	GENERAL STYLING
+	***************
+*/
+
+body {
+	margin: 0 0 30px !important;
+}
+
+*:hover {
+	transition: .1s all ease-in-out;
+}
+
+/* LINKS */
+a {text-decoration: none;}
+a:hover {text-decoration: underline;}
