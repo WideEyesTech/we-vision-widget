@@ -1,6 +1,2 @@
 node_modules/*
-js/*
-build/*
-!build/config.json
-*.original
 .DS_STORE
