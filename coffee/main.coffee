@@ -11,8 +11,8 @@ require.config
     'jquery-private': { 'jquery': 'jquery' }
   paths:
     'jquery': 'vendor/jquery/dist/jquery'
-    'underscore': 'vendor/underscore/lodash'
     'backbone': 'vendor/backbone/backbone'
+    'underscore': 'vendor/underscore/lodash'
     'handlebars.runtime': 'vendor/handlebars/handlebars.runtime'
 
   shim:
