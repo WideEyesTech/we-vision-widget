@@ -21,13 +21,17 @@ Dependencies
 This project has the following dependencies:
 
 - [Iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer)
-- [Backbone](http://backbonejs.org/)
 - [Underscore](http://underscorejs.org/)
-- [Requirejs](http://requirejs.org/)
 - [Handlebars](http://handlebarsjs.com/)
+- [Backbone](http://backbonejs.org/)
+- [Requirejs](http://requirejs.org/)
 - [jQuery](http://jquery.com/)
 
 They all come prebundled and minified with the library.
+
+**BEWARE:** Iframe-resizer includes a global script file that may collide with some other version of the same library, in case you have it included in your project. We-vision-widget comes prebundled with iframe-resizer v2.8.10.
+
+*Note*: Iframe-resizer supports multiple iframes in the same page.
 
 Setup
 -------------
@@ -56,7 +60,7 @@ See our [example](example.html) to see how you should do it.
  * **widgetPositionAfter**: The CSS Selector of the element after which will be placed the widget.
  * **type**: Custom font styling
   * **font-family**: String of the font-family set to be applied to the widget
-     * **options**: String with any valid font-family set 
+     * **options**: String with any valid font-family set
      * **value**: All valid font-family sets (default = "'Helvetica Neue', Helvetica, Arial, sans-serif")
   * **font-size**: Font size to be applied within the widget
      * **options**: Integer with a valid font size
@@ -71,10 +75,10 @@ See our [example](example.html) to see how you should do it.
   * **mobileColumnCount**: The number of columns of the widget when in mobile.
      * **options**: Legal options for the number of columns in mobile.
      * **value**:The actual number of columns that the widget is configured to have in mobile.
-  * **itemCount**: The number of elements per page (in case of pagination). 
+  * **itemCount**: The number of elements per page (in case of pagination).
      * **options**: Legal options for the number of elements in the page.
      * **value**: The actual configuration of the number of elements in the page.
-  * **isCentered**: Choose if the grid of products should be centered relative to the viewport, or not. 
+  * **isCentered**: Choose if the grid of products should be centered relative to the viewport, or not.
      * **options**: boolean value (true or false).
      * **value**: true or false (default = false).
  * **tile**: The configuration for each of the elements in the widget.
@@ -83,7 +87,7 @@ See our [example](example.html) to see how you should do it.
   * **hasSubtitle**: The element should have a Subtitle?.
   * **hasDescription**: The element should have a Description?.
  * **mode**: The mode of execution of the widget (debug|production).
- 
+
 Also you will need to adjust the html templates and the CSS to meet your requirements, we only provide some generics as a foundation.
 
 #### HTML
@@ -109,7 +113,7 @@ Quick Start
   <script>
     // Configure the api_key and the product_id and the rest of the parameters.
     window.wide_eyes_product_id = document.getElementById("product-id").innerHTML;
-    window.wide_eyes_config = 
+    window.wide_eyes_config =
       {
         "apikey": "b29da1968414512ea4c3b833609469c278ec9f52",
         "numberOfElements": 16, // number of elements to retrieve from API
@@ -123,7 +127,7 @@ Quick Start
           "columnCount": 4, // [1, 2, 4, 8]
           "mobileColumnCount": 1, // [1, 2]
           "itemCount": 8, //number of elements per page: [4, 8, 16, 24]
-          'isCentered': false // container to be centered in bigger screens: true or false 
+          'isCentered': false // container to be centered in bigger screens: true or false
         },
         "tile": {
           "hasImage": true,
@@ -149,10 +153,10 @@ Development process
 --------------------
 
 1. Install dependencies: ```npm install```
-2. Run watcher & server: 
+2. Run watcher & server:
   1. ```npm run dev``` (generates js/we-widget.js)
   2. Copy the snippet included in [Quick Start](#quick-start) selecting mode "debug", deleting/commenting the production script and uncommenting the debug scripts
-3. Build for production: 
+3. Build for production:
   1. ```npm run build``` (generates build/main_internal and main_external.js)
   2. Copy the snippet included in [Quick Start](#quick-start) selecting mode "production", deleting/commenting the debug scripts and uncommenting the production script
 
