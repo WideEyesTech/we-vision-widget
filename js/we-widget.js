@@ -19,7 +19,7 @@ data = {
 req = new XMLHttpRequest();
 
 req.addEventListener('readystatechange', function() {
-  var html, iframe, response, widget;
+  var css_src, html, iframe, main_internal_src, response, widget;
   if (req.readyState === 4 && req.status === 200) {
     response = JSON.parse(req.responseText);
     response.result_both.splice(0, 2);
@@ -30,7 +30,7 @@ req.addEventListener('readystatechange', function() {
     iframe.setAttribute('frameborder', 'no');
     iframe.setAttribute('scrolling', 'no');
     iframe.setAttribute('onload', 'iFrameResize({checkOrigin: false}, "#we-iframe")');
-    widget = document.getElementById('widget');
+    widget = document.querySelector(config.widgetPositionAfter);
     widget.appendChild(iframe);
     if (config.mode === 'debug') {
       response = JSON.stringify(response);
@@ -39,7 +39,13 @@ req.addEventListener('readystatechange', function() {
     } else if (config.mode === 'production' || !config.mode) {
       response = JSON.stringify(response);
       config = JSON.stringify(config);
-      html = '<!DOCTYPE html> <html> <head> <script> var products = ' + response + '; var config = ' + config + '; var product_id = "' + product_id + '"; </script> <link rel="stylesheet" href="' + scriptSrc + '/main.min.css"> <base target="_blank"/> </head> <body> <section id="widget"></section> <script src="' + scriptSrc + '/main_internal.min.js"></script> </body> </html>';
+      css_src = scriptSrc + '/main.min.css';
+      main_internal_src = scriptSrc + '/main_internal.min.js';
+      if (scriptSrc === '') {
+        main_internal_src = 'main_internal.min.js';
+        css_src = 'main.min.css';
+      }
+      html = '<!DOCTYPE html> <html> <head> <script> var products = ' + response + '; var config = ' + config + '; var product_id = "' + product_id + '"; </script> <link rel="stylesheet" href="' + css_src + '"> <base target="_blank"/> </head> <body> <section id="widget"></section> <script src="' + main_internal_src + '"></script> </body> </html>';
     }
     iframe.contentWindow.document.open();
     iframe.contentWindow.document.write(html);

@@ -15,8 +15,7 @@ require.config({
     'jquery': 'vendor/jquery/dist/jquery',
     'backbone': 'vendor/backbone/backbone',
     'underscore': 'vendor/underscore/lodash',
-    'handlebars.runtime': 'vendor/handlebars/handlebars.runtime',
-    'iframeResizer': 'vendor/iframe-resizer/src/iframeResizer.contentWindow.js'
+    'handlebars.runtime': 'vendor/handlebars/handlebars.runtime'
   },
   shim: {
     'templates/widget_container': {

@@ -40,7 +40,7 @@ define(function(require) {
 
     Loader.prototype.render = function() {
       var widget_container;
-      $(config.widgetPositionAfter).prepend(this.el);
+      $("#widget").prepend(this.el);
       widget_container = new WidgetContainer({
         model: products,
         product_id: product_id,

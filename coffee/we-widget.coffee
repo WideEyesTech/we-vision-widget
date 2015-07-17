@@ -26,7 +26,8 @@ req.addEventListener 'readystatechange', ->
 		iframe.setAttribute 'frameborder', 'no'
 		iframe.setAttribute 'scrolling', 'no'
 		iframe.setAttribute 'onload', 'iFrameResize({checkOrigin: false}, "#we-iframe")'
-		widget = document.getElementById 'widget'
+    
+		widget = document.querySelector config.widgetPositionAfter
 		widget.appendChild iframe
 		
 		if config.mode == 'debug'
@@ -53,8 +54,13 @@ req.addEventListener 'readystatechange', ->
 					</body>
 				</html>'
 		else if config.mode == 'production' or !config.mode
-			response = JSON.stringify response 
+			response = JSON.stringify response
 			config = JSON.stringify(config)
+			css_src = scriptSrc+'/main.min.css'
+			main_internal_src = scriptSrc + '/main_internal.min.js'
+			if (scriptSrc == '')
+				main_internal_src = 'main_internal.min.js'
+				css_src = 'main.min.css'
 			html = 
 				'<!DOCTYPE html>
 				<html>
@@ -64,12 +70,12 @@ req.addEventListener 'readystatechange', ->
 							var config = '+config+';
 							var product_id = "'+product_id+'";
 					    </script>
-						<link rel="stylesheet" href="'+scriptSrc+'/main.min.css">
+						<link rel="stylesheet" href="'+css_src+'">
 						<base target="_blank"/>
 					</head>
 					<body>
 						<section id="widget"></section>
-						<script src="'+scriptSrc+'/main_internal.min.js"></script>
+						<script src="'+main_internal_src+'"></script>
 					</body>
 				</html>'
 

@@ -28,7 +28,7 @@ define (require) ->
       @render()
 
     render: ->
-      $(config.widgetPositionAfter).prepend @el
+      $("#widget").prepend @el
       widget_container = new WidgetContainer
         model: products
         product_id: product_id
