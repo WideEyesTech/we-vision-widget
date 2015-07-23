@@ -19,7 +19,7 @@ data = {
 req = new XMLHttpRequest();
 
 req.addEventListener('readystatechange', function() {
-  var css_src, html, iframe, main_internal_src, response, widget;
+  var css_src, html, iframe, response, weVisionWidget_src, widget;
   if (req.readyState === 4 && req.status === 200) {
     response = JSON.parse(req.responseText);
     response.result_both.splice(0, 2);
@@ -39,13 +39,13 @@ req.addEventListener('readystatechange', function() {
     } else if (config.mode === 'production' || !config.mode) {
       response = JSON.stringify(response);
       config = JSON.stringify(config);
-      css_src = scriptSrc + '/main.min.css';
-      main_internal_src = scriptSrc + '/main_internal.min.js';
+      css_src = scriptSrc + '/weVisionWidget_internal.min.css';
+      weVisionWidget_src = scriptSrc + '/weVisionWidget_internal.min.js';
       if (scriptSrc === '') {
-        main_internal_src = 'main_internal.min.js';
-        css_src = 'main.min.css';
+        weVisionWidget_src = 'weVisionWidget_internal.min.js';
+        css_src = 'weVisionWidget_internal.min.css';
       }
-      html = '<!DOCTYPE html> <html> <head> <script> var products = ' + response + '; var config = ' + config + '; var product_id = "' + product_id + '"; </script> <link rel="stylesheet" href="' + css_src + '"> <base target="_blank"/> </head> <body> <section id="widget"></section> <script src="' + main_internal_src + '"></script> </body> </html>';
+      html = '<!DOCTYPE html> <html> <head> <script> var products = ' + response + '; var config = ' + config + '; var product_id = "' + product_id + '"; </script> <link rel="stylesheet" href="' + css_src + '"> <base target="_blank"/> </head> <body> <section id="widget"></section> <script src="' + weVisionWidget_src + '"></script> </body> </html>';
     }
     iframe.contentWindow.document.open();
     iframe.contentWindow.document.write(html);
