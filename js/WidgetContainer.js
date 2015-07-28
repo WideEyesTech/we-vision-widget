@@ -63,7 +63,7 @@ define(function(require) {
       var itemCount, parsed_results, results;
       results = products;
       parsed_results = this._parseVisionResults(results);
-      itemCount = config.layout.columnCount || 4;
+      itemCount = this.widget_configuration.layout.columnCount || 4;
       parsed_results = this._chunkData(parsed_results, itemCount);
       return this.rows = parsed_results;
     };
@@ -112,10 +112,10 @@ define(function(require) {
       }
       i = 0;
       while (i < list.length) {
-        if (!config.tile.hasImage) {
+        if (!this.widget_configuration.tile.hasImage) {
           delete list[i].ImgUrls;
         }
-        if (!config.tile.hasTitle) {
+        if (!this.widget_configuration.tile.hasTitle) {
           delete list[i].ProductName;
         }
         if (typeof list[i].ProductCustomData === "string") {
@@ -123,10 +123,10 @@ define(function(require) {
             list[i].ProductCustomData = '';
           } else {
             list[i].ProductCustomData = JSON.parse(list[i].ProductCustomData);
-            if (!config.tile.hasDescription) {
+            if (!this.widget_configuration.tile.hasDescription) {
               delete list[i].ProductCustomData.description;
             }
-            if (!config.tile.hasPrice) {
+            if (!this.widget_configuration.tile.hasPrice) {
               delete list[i].ProductCustomData.price;
             } else {
               list[i].ProductCustomData.price = list[i].ProductCustomData.price.toFixed(2);

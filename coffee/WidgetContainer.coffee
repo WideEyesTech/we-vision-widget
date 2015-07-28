@@ -27,27 +27,27 @@ define (require) ->
         @$el.append products_container.render().el
       super
       @
-      
+
     show: (callback = ->) ->
       callback()
-          
+
     hide: (callback = ->) ->
       callback()
-      
+
     _extractModelData: ->
       results = products
       parsed_results = @_parseVisionResults results
-      
-      itemCount = config.layout.columnCount || 4
+
+      itemCount = @widget_configuration.layout.columnCount || 4
       parsed_results = @_chunkData parsed_results, itemCount
       @rows = parsed_results
-      
+
     _chunkData: (arr, size) ->
       newArr = []
       for item, i in arr by size
         newArr.push (arr.slice i, i+size)
       newArr
-      
+
     # Get the array of results from the api results
     _parseVisionResults: (results) ->
       list = []
@@ -57,7 +57,7 @@ define (require) ->
           break
         list = list.concat(results.result_both[i])
         i++
-      
+
       # if empty then the shape array
       if results.result_both.length == 0
         i = 0
@@ -66,7 +66,7 @@ define (require) ->
             break
           list = list.concat(results.result_shape[i])
           i++
-      
+
       # if empty then the color array
       if results.result_both.length == 0 and results.result_shape.length == 0
         i = 0
@@ -78,47 +78,47 @@ define (require) ->
       i = 0
 
       while i < list.length
-        if !config.tile.hasImage
+        if !@widget_configuration.tile.hasImage
           delete list[i].ImgUrls
-        if !config.tile.hasTitle
+        if !@widget_configuration.tile.hasTitle
           delete list[i].ProductName
         if (typeof(list[i].ProductCustomData)=="string")
           if (list[i].ProductCustomData == '')
             list[i].ProductCustomData = ''
           else
             list[i].ProductCustomData = JSON.parse(list[i].ProductCustomData)
-            if !config.tile.hasDescription
+            if !@widget_configuration.tile.hasDescription
                delete list[i].ProductCustomData.description
-            if !config.tile.hasPrice
+            if !@widget_configuration.tile.hasPrice
               delete list[i].ProductCustomData.price
-            else 
+            else
               list[i].ProductCustomData.price = list[i].ProductCustomData.price.toFixed(2)
 
-            
+
         i++
       list
-      
+
     _filterProductFromVisionResults: (results, productId) ->
       res = {}
       res.result_both = results.result_both.filter( (val,indx,arr_obj) ->
         if (val.ProductId == productId)
           return false
-        else 
+        else
           return true
       )
-      res.result_shape = results.result_shape.filter( (val,indx,arr_obj) -> 
+      res.result_shape = results.result_shape.filter( (val,indx,arr_obj) ->
         if (val.ProductId == productId)
           return false
-        else 
+        else
           return true
       )
       res.result_color = results.result_color.filter( (val,indx,arr_obj) ->
         if (val.ProductId == productId)
           return false
-        else 
+        else
           return true
       )
       res
-    
-    _getTemplateData: -> 
+
+    _getTemplateData: ->
       {products : @rows}

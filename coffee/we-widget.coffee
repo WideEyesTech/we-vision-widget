@@ -40,7 +40,7 @@ req.addEventListener 'readystatechange', ->
 					<head>
 					    <script>
 					    	var products = '+response+';
-							var config = '+config+';
+							var glbWeConfig = '+config+';
 							var product_id = "'+product_id+'";
 					    </script>
 						<link rel="stylesheet" href="'+scriptSrc+'/css/main.css">
@@ -58,16 +58,13 @@ req.addEventListener 'readystatechange', ->
 			config = JSON.stringify(config)
 			css_src = scriptSrc+'/weVisionWidget_internal.min.css'
 			weVisionWidget_src = scriptSrc + '/weVisionWidget_internal.min.js'
-			if (scriptSrc == '')
-				weVisionWidget_src = 'weVisionWidget_internal.min.js'
-				css_src = 'weVisionWidget_internal.min.css'
 			html =
 				'<!DOCTYPE html>
 				<html>
 					<head>
 					    <script>
 					    	var products = '+response+';
-							var config = '+config+';
+							var glbWeConfig = '+config+';
 							var product_id = "'+product_id+'";
 					    </script>
 						<link rel="stylesheet" href="'+css_src+'">
