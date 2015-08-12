@@ -2,12 +2,7 @@ console.log products
 require.config
   baseUrl: 'js'
   map:
-    # '*' means all modules will get 'jquery-private'
-    # for their 'jquery' dependency.
     '*': { 'jquery': 'jquery-private' },
-    # 'jquery-private' wants the real jQuery module
-    # though. If this line was not here, there would
-    # be an unresolvable cyclic dependency.
     'jquery-private': { 'jquery': 'jquery' }
   paths:
     'jquery': 'vendor/jquery/dist/jquery'
@@ -16,7 +11,6 @@ require.config
     'handlebars.runtime': 'vendor/handlebars/handlebars.runtime'
 
   shim:
-    # Must shim all partials used in templates
     'templates/widget_container':
       deps: []
     'templates/product_container':
@@ -25,12 +19,7 @@ require.config
       deps: []
   waitSeconds: 10
 
-# Must also manually require all partials otherwise they don't get loaded :/
-#require.config
-#  context: 'WideEyesWidget'
 require [
   'jquery'
   'Loader'
-], ($, Loader) ->
-  $ ->
-    new Loader
+], ($, Loader) -> new Loader

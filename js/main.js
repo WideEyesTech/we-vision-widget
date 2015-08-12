@@ -32,7 +32,5 @@ require.config({
 });
 
 require(['jquery', 'Loader'], function($, Loader) {
-  return $(function() {
-    return new Loader;
-  });
+  return new Loader;
 });

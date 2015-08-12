@@ -63,7 +63,7 @@ define(function(require) {
       var itemCount, parsed_results, results;
       results = products;
       parsed_results = this._parseVisionResults(results);
-      itemCount = config.layout.columnCount || 4;
+      itemCount = config.layout.minColumnCount || 4;
       parsed_results = this._chunkData(parsed_results, itemCount);
       return this.rows = parsed_results;
     };
@@ -110,11 +110,14 @@ define(function(require) {
           i++;
         }
       }
+      list = this._filterTileContent(list);
+      return list;
+    };
+
+    WidgetContainer.prototype._filterTileContent = function(list) {
+      var i;
       i = 0;
       while (i < list.length) {
-        if (!config.tile.hasImage) {
-          delete list[i].ImgUrls;
-        }
         if (!config.tile.hasTitle) {
           delete list[i].ProductName;
         }

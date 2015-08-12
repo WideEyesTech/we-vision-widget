@@ -28,7 +28,7 @@ define(function(require) {
       return Loader.__super__.constructor.apply(this, arguments);
     }
 
-    Loader.prototype.className = 'we-widget-loader';
+    Loader.prototype.className = 'we-vision-loader';
 
     Loader.prototype.initialize = function() {
       if (config && config.mode && config.mode === 'debug') {
@@ -53,75 +53,95 @@ define(function(require) {
     };
 
     Loader.prototype._applyStyling = function() {
-      if (config.layout.isCentered) {
-        $('.grid').css('margin', '0 auto');
-      }
+      var style;
+      style = document.createElement('style');
+      document.head.appendChild(style);
+      this.styleSheet = style.sheet;
       if (config.type) {
         this._insertTypeStyles();
       }
-      if (config.layout.columnCount) {
-        return this._applyCustomLayout(config.layout.columnCount);
+      if (config.layout.isCentered) {
+        $('.grid').css('margin', '0 auto');
+      }
+      if (config.layout.minColumnCount) {
+        this._applyCustomLayout(config.layout.minColumnCount, config.layout.responsize);
+      }
+      if (config.image) {
+        return this._applyCustomImageStyling();
       }
     };
 
-    Loader.prototype._applyCustomLayout = function(colCount) {
-      var cardRule, imgRule, mediaRule, style, styleSheet;
-      style = document.getElementsByTagName('style');
-      styleSheet = style[0].sheet;
-      $('.card').addClass('col-xs-1-' + config.layout.mobileColumnCount);
+    Loader.prototype._applyCustomImageStyling = function() {
+      var imgSizeRule, maxHeight, maxWidth;
+      maxWidth = config.image["max-width"] ? config.image["max-width"] : '';
+      maxHeight = config.image["max-height"] ? config.image["max-height"] : '';
+      imgSizeRule = '.card .image-container img { max-width: ' + maxWidth + 'px; max-height: ' + maxHeight + 'px; }';
+      return this.styleSheet.insertRule(imgSizeRule, this.styleSheet.cssRules.length - 1);
+    };
+
+    Loader.prototype._applyCustomLayout = function(colCount, responsive) {
       if (colCount === 8) {
-        $('.card').addClass('col-sm-1-2 col-md-1-4 col-lg-1-8');
-        $('.grid').css('max-width', '1600px');
-        cardRule = '.card { height: 300px; }';
-        imgRule = '.image-container img { max-height: 220px; }';
-        mediaRule = '@media (min-width: 1024px) { .card { height: auto; } .image-container img { max-height: none; } }';
-        styleSheet.insertRule(mediaRule, 0);
-        styleSheet.insertRule(cardRule, 0);
-        return styleSheet.insertRule(imgRule, 0);
+        $('.card').addClass('col-xs-1-8');
+        return $('.grid').css('max-width', '1600px');
+      } else if (colCount === 5) {
+        $('.card').addClass('col-xs-1-5');
+        $('.grid').css('max-width', '1200px');
+        if (responsive) {
+          return $('.card').addClass('col-lg-8');
+        }
       } else if (colCount === 4) {
-        $('.card').addClass('col-sm-1-2 col-md-1-4');
+        $('.card').addClass('col-xs-1-4');
         $('.grid').css('max-width', '1024px');
-        cardRule = '.card { height: 300px; }';
-        imgRule = '.image-container img { max-height: 220px; }';
-        mediaRule = '@media (min-width: 768px) { .card { height: auto; } .image-container img{ max-height: none; } }';
-        styleSheet.insertRule(mediaRule, 0);
-        styleSheet.insertRule(cardRule, 0);
-        return styleSheet.insertRule(imgRule, 0);
+        if (responsive) {
+          return $('.card').addClass('col-lg-8');
+        }
       } else if (colCount === 2) {
-        $('.card').addClass(' col-sm-1-2');
+        $('.card').addClass('col-xs-1-2');
         $('.grid').css('max-width', '768px');
-        cardRule = '.card { height: 300px; }';
-        imgRule = '.image-container img { max-height: 220px; }';
-        mediaRule = '@media (min-width: 550px) { .card { height: auto; } .image-container img { max-height: none; } }';
-        styleSheet.insertRule(mediaRule, 0);
-        styleSheet.insertRule(cardRule, 0);
-        return styleSheet.insertRule(imgRule, 0);
+        if (responsive) {
+          return $('.card').addClass('col-md-1-4 col-lg-8');
+        }
       } else if (colCount === 1) {
-        $('.card').addClass(' col-sm-1-1');
-        return $('.grid').css('max-width', '550px');
+        $('.card').addClass(' col-xs-1-1');
+        $('.grid').css('max-width', '550px');
+        if (responsive) {
+          return $('.card').addClass('col-sm-1-2 col-md-1-4 col-lg-1-8');
+        }
       } else {
-        $('.card').addClass(' col-sm-1-2 col-md-1-4');
-        $('.grid').css('max-width', '1024px');
-        cardRule = '.card { height: 300px; }';
-        imgRule = '.image-container img { max-height: 220px; }';
-        mediaRule = '@media (min-width: 768px) { .card { height: auto; } .image-container img{ max-height: none; } }';
-        styleSheet.insertRule(mediaRule, 0);
-        styleSheet.insertRule(cardRule, 0);
-        return styleSheet.insertRule(imgRule, 0);
+        $('.card').addClass('col-xs-1-1 col-sm-1-2 col-md-1-4');
+        return $('.grid').css('max-width', '1024px');
       }
     };
 
     Loader.prototype._insertTypeStyles = function() {
-      var configType, fontColor, fontFamily, fontSize, style, styleSheet, typeRule;
-      style = document.createElement('style');
-      document.head.appendChild(style);
-      styleSheet = style.sheet;
-      configType = config.type ? config.type : null;
-      fontFamily = configType && configType['font-family'] ? configType['font-family'] : '';
-      fontSize = configType && configType['font-size'] ? configType['font-size'] : '';
-      fontColor = configType && configType['color'] ? configType['color'] : '';
-      typeRule = 'body { font-family: ' + fontFamily + '; font-size: ' + fontSize + 'px; color: ' + fontColor + '; }';
-      return styleSheet.insertRule(typeRule, 0);
+      var bodyRule, displayHeader, ff, ffName, ffRule, ffUrl, fontColor, fontFamily, fontSize, fontWeight, headerFontSize, headerRule, letterSpacing, textTransform, type;
+      type = config.type ? config.type : null;
+      if (!type) {
+        return false;
+      }
+      fontFamily = type['font-family'] ? type['font-family'] : '';
+      fontSize = type['font-size'] ? type['font-size'] : '';
+      fontColor = type['color'] ? type['color'] : '';
+      displayHeader = type.title['display'] ? 'block' : 'none';
+      letterSpacing = type.title['letter-spacing'] ? type.title['letter-spacing'] : '';
+      headerFontSize = type.title['font-size'] ? type.title['font-size'] : '';
+      fontWeight = type.title['font-weight'] ? type.title['font-weight'] : '';
+      textTransform = type.title['transform'] ? type.title['transform'] : '';
+      bodyRule = 'body { font-family: ' + fontFamily + '; font-size: ' + fontSize + 'px; color: ' + fontColor + '; }';
+      headerRule = '.grid > h2 { display: ' + displayHeader + '; letter-spacing: ' + letterSpacing + 'em; text-transform: ' + textTransform + '; font-size: ' + headerFontSize + 'px; font-weight: ' + fontWeight + '; }';
+      this.styleSheet.insertRule(headerRule, 0);
+      this.styleSheet.insertRule(bodyRule, 0);
+      ff = type['font-face'] ? type['font-face'] : null;
+      if (ff) {
+        ffUrl = ff.url ? ff.url : '';
+        if (ffUrl.indexOf('http') > -1) {
+          ffRule = "@import '" + ffUrl + "';";
+        } else {
+          ffName = ff.name ? ff.name : '';
+          ffRule = "@font-face { font-family: " + ffName + "; src: url(" + ffUrl + "); }";
+        }
+        return this.styleSheet.insertRule(ffRule, 0);
+      }
     };
 
     return Loader;

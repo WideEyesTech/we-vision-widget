@@ -5,26 +5,19 @@
       <a href="{{this.ProductUrl}}">
         <img class="productsImage" src="{{this.ImgUrls.[0]}}">
       </a>
-      {{!-- {{#if this.ProductCustomData.description}}
-      <section class="hover-all text-center product-description">
-        <p>
-          <small>{{this.ProductCustomData.description}}</small>
-        </p>
-      </section>
-      {{/if}} --}}
     </section>
     {{/if}}
-    <article class="text-xs-center text-md-left">
+    <article class="text-xs-center more-info">
       <header>
         {{#if this.ProductName}}
-        <h4 class="product-title bold">
-          {{this.ProductName}}
-        </h4>
+        <h1 class="product-title">
+            <a href="{{this.ProductUrl}}">{{this.ProductName}}</a>
+        </h1>
+        {{/if}}
+        {{#if this.ProductCustomData.price}}
+         <h3>{{this.ProductCustomData.price}} &euro;</h3>
         {{/if}}
       </header>
-      {{#if this.ProductCustomData.price}}
-       <p>{{this.ProductCustomData.price}} &euro;</p>
-      {{/if}}
     </article>
   </div>
 </div>
