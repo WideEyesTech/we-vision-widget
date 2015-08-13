@@ -2,7 +2,7 @@
 var WeVisionWidget, weVisionWidget;
 
 WeVisionWidget = (function() {
-  WeVisionWidget.prototype.API_URL = 'http://api-mirror.wide-eyes.it';
+  WeVisionWidget.prototype.API_URL = 'http://api.wide-eyes.it';
 
   function WeVisionWidget() {
     var config, data, product_id, req, script, scriptSrc;

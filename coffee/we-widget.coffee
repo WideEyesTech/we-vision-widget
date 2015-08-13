@@ -1,5 +1,5 @@
 class WeVisionWidget
-	API_URL: 'http://api-mirror.wide-eyes.it'
+	API_URL: 'http://api.wide-eyes.it'
 	constructor: () ->
 
 		# get script source
