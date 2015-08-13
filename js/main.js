@@ -12,9 +12,11 @@ require.config({
     }
   },
   paths: {
+    'Event': 'vendor/Event/Event',
     'jquery': 'vendor/jquery/dist/jquery',
     'backbone': 'vendor/backbone/backbone',
     'underscore': 'vendor/underscore/lodash',
+    'Magnifier': 'vendor/Magnifier/Magnifier',
     'handlebars.runtime': 'vendor/handlebars/handlebars.runtime'
   },
   shim: {

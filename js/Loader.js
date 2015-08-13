@@ -3,11 +3,13 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 define(function(require) {
-  var $, Backbone, Handlebars, Loader, WeSaas, WidgetContainer, _;
+  var $, Backbone, Event, Handlebars, Loader, Magnifier, WeSaas, WidgetContainer, _;
   $ = require('jquery');
   _ = require('underscore');
   Backbone = require('backbone');
   Handlebars = require('handlebars.runtime');
+  Event = require('Event');
+  Magnifier = require('Magnifier');
   WidgetContainer = require('WidgetContainer');
   WeSaas = require('WeSaas');
   Handlebars.registerHelper('equals', function(lvalue, rvalue, options) {
@@ -49,7 +51,37 @@ define(function(require) {
       this.$el.append(widget_container.render().el);
       widget_container.show();
       this._applyStyling();
+      if (config.image.magnifier) {
+        this._activateMagnifier();
+      }
       return this;
+    };
+
+    Loader.prototype._activateMagnifier = function() {
+      var evt, m, prev;
+      evt = new Event;
+      m = new Magnifier(evt);
+      m.attach({
+        thumb: ".productsImage",
+        largeWrapper: 'preview',
+        zoomable: true
+      });
+      prev = $('#preview');
+      return $(window).mousemove(function(event) {
+        var body, doc, eventDoc;
+        event = event || window.event;
+        if (event.pageX === null && event.clientX !== null) {
+          eventDoc = event.target && event.target.ownerDocument || document;
+          doc = eventDoc.documentElement;
+          body = eventDoc.body;
+          event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc && doc.clientLeft || body && body.clientLeft || 0);
+          event.pageY = event.clientY + (doc && doc.scrollTop || body && body.scrollTop || 0) - (doc && doc.clientTop || body && body.clientTop || 0);
+        }
+        return prev.offset({
+          top: event.pageY,
+          left: event.pageX - prev.width() / 2
+        });
+      });
     };
 
     Loader.prototype._applyStyling = function() {

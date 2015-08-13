@@ -52,9 +52,8 @@ class WeVisionWidget
 							</head>
 							<body>
 								<section id="widget"></section>
-								<script src="'+scriptSrc+'/vendor/Event/Event.js"></script>
+								<section id="preview" class="magnifier-preview" style="width: 200px; height: 184px;"></section>
 								<script src="'+scriptSrc+'/vendor/requirejs/require.js"></script>
-								<script src="'+scriptSrc+'/vendor/Magnifier/Magnifier.js"></script>
 								<script src="'+scriptSrc+'/vendor/iframe-resizer/src/iframeResizer.contentWindow.js"></script>
 								<script src="'+scriptSrc+'/main.js"></script>
 							</body>
@@ -81,6 +80,7 @@ class WeVisionWidget
 							</head>
 							<body>
 								<section id="widget"></section>
+								<section id="preview" class="magnifier-preview" style="width: 200px; height: 184px;"></section>
 								<script src="'+we_vision_internal_src+'"></script>
 							</body>
 						</html>'

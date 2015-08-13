@@ -3,6 +3,7 @@
   IFRAME CSS STYLING
   ******************
 */
+@import "magnifier.css";
 @import "normalize.css";
 
 @import "base.css";
@@ -46,11 +47,6 @@
 }
 
 .card .inner .image-container {
-  position: relative;
-}
-
-.card .inner .image-container > a {
-  display: block;
   position: relative;
 }
 

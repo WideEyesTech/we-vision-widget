@@ -38,8 +38,8 @@ define (require) ->
       results = products
       parsed_results = @_parseVisionResults results
 
-      itemCount = config.layout.minColumnCount || 4
-      parsed_results = @_chunkData parsed_results, itemCount
+      elmsPerRow = config.layout.minColumnCount || 4
+      parsed_results = @_chunkData parsed_results, elmsPerRow
       @rows = parsed_results
 
     _chunkData: (arr, size) ->
@@ -53,7 +53,7 @@ define (require) ->
       list = []
       i = 0
       while i < results.result_both.length
-        if i >= @widget_configuration.layout.itemCount
+        if i >= @widget_configuration.layout.numOfElms
           break
         list = list.concat(results.result_both[i])
         i++
@@ -62,7 +62,7 @@ define (require) ->
       if results.result_both.length == 0
         i = 0
         while i < results.result_shape.length
-          if i >= @widget_configuration.layout.itemCount
+          if i >= @widget_configuration.layout.numOfElms
             break
           list = list.concat(results.result_shape[i])
           i++
@@ -71,7 +71,7 @@ define (require) ->
       if results.result_both.length == 0 and results.result_shape.length == 0
         i = 0
         while i < results.result_color.length
-          if i >= @widget_configuration.layout.itemCount
+          if i >= @widget_configuration.layout.numOfElms
             break
           list = list.concat(results.result_color[i])
           i++

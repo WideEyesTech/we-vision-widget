@@ -60,11 +60,11 @@ define(function(require) {
     };
 
     WidgetContainer.prototype._extractModelData = function() {
-      var itemCount, parsed_results, results;
+      var elmsPerRow, parsed_results, results;
       results = products;
       parsed_results = this._parseVisionResults(results);
-      itemCount = config.layout.minColumnCount || 4;
-      parsed_results = this._chunkData(parsed_results, itemCount);
+      elmsPerRow = config.layout.minColumnCount || 4;
+      parsed_results = this._chunkData(parsed_results, elmsPerRow);
       return this.rows = parsed_results;
     };
 
@@ -84,7 +84,7 @@ define(function(require) {
       list = [];
       i = 0;
       while (i < results.result_both.length) {
-        if (i >= this.widget_configuration.layout.itemCount) {
+        if (i >= this.widget_configuration.layout.numOfElms) {
           break;
         }
         list = list.concat(results.result_both[i]);
@@ -93,7 +93,7 @@ define(function(require) {
       if (results.result_both.length === 0) {
         i = 0;
         while (i < results.result_shape.length) {
-          if (i >= this.widget_configuration.layout.itemCount) {
+          if (i >= this.widget_configuration.layout.numOfElms) {
             break;
           }
           list = list.concat(results.result_shape[i]);
@@ -103,7 +103,7 @@ define(function(require) {
       if (results.result_both.length === 0 && results.result_shape.length === 0) {
         i = 0;
         while (i < results.result_color.length) {
-          if (i >= this.widget_configuration.layout.itemCount) {
+          if (i >= this.widget_configuration.layout.numOfElms) {
             break;
           }
           list = list.concat(results.result_color[i]);

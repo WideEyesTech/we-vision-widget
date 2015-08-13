@@ -44,21 +44,25 @@
         "transform": "uppercase", // options: [uppercase, capitalize, lowercase]
         "letter-spacing": 0.13,
         "font-weight": 400,
-        "font-size": 16,
+        "font-size": 12,
         "display": true
       }
     },
     "tile": {
-      "display": true,
-      "hasTitle": true,
-      "hasPrice": true
+      "display": false,
+      "hasTitle": false,
+      "hasPrice": false
     },
     "layout": {
+      "numOfElms": 5,
+      "responsize": true, // if true, number of displayed products per row will vary according to the viewport size
       "isCentered": true, // container to be centered in bigger screens: true or false
-      "minColumnCount": 2, // minimum number of displayed products per row [1, 2, 4, 5, 8]
-      "responsize": true // if true, number of displayed products per row will vary according to the viewport size
+      "minColumnCount": 4 // minimum number of displayed products per row [1, 2, 4, 5, 8]
     },
-    "image": {},
+    "image": {
+      "magnifier": true,
+      // max-height: 220
+    },
     "mode": "production" // default is production
   };
   </script>
@@ -67,8 +71,8 @@
   <script id="we-vision-script" src="build/we_vision_external.min.js"></script>
 
   <!-- debug scripts -->
-  <!-- <script src="js/vendor/iframe-resizer/src/iframeResizer.js"></script>
-  <script id="we-vision-script" src="js/we-widget.js"></script> -->
+  <!-- <script src="js/vendor/iframe-resizer/src/iframeResizer.js"></script> -->
+  <!-- <script id="we-vision-script" src="js/we-widget.js"></script> -->
 </body>
 
 </html>

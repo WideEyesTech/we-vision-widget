@@ -4,6 +4,8 @@ define (require) ->
   _ = require 'underscore'
   Backbone = require 'backbone'
   Handlebars = require 'handlebars.runtime'
+  Event = require 'Event'
+  Magnifier = require 'Magnifier'
   WidgetContainer = require 'WidgetContainer'
   WeSaas = require 'WeSaas'
   Handlebars.registerHelper 'equals', (lvalue, rvalue, options) ->
@@ -36,7 +38,35 @@ define (require) ->
       @$el.append widget_container.render().el
       widget_container.show()
       @_applyStyling()
+      if config.image.magnifier
+        # evt = new Event
+        # m = new Magnifier evt
+        # m.attach {
+        #   thumb: ".productsImage",
+        #   mode: 'inside',
+        #   zoomable: true
+        # }
+        @_activateMagnifier()
       @
+
+    _activateMagnifier: () ->
+      evt = new Event
+      m = new Magnifier evt
+      m.attach {
+        thumb: ".productsImage",
+        largeWrapper: 'preview',
+        zoomable: true
+      }
+      prev = $('#preview')
+      $(window).mousemove (event) ->
+        event = event or window.event
+        if event.pageX == null and event.clientX != null
+          eventDoc = event.target and event.target.ownerDocument or document
+          doc = eventDoc.documentElement
+          body = eventDoc.body
+          event.pageX = event.clientX + (doc and doc.scrollLeft or body and body.scrollLeft or 0) - (doc and doc.clientLeft or body and body.clientLeft or 0)
+          event.pageY = event.clientY + (doc and doc.scrollTop or body and body.scrollTop or 0) - (doc and doc.clientTop or body and body.clientTop or 0)
+        prev.offset {top: event.pageY, left: event.pageX - prev.width() / 2}
 
     _applyStyling: ->
       style = document.createElement 'style'

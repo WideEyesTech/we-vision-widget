@@ -2,8 +2,8 @@
   <div class="inner">
     {{#if this.ImgUrls}}
     <section class="image-container">
-      <a href="{{this.ProductUrl}}">
-        <img class="productsImage" src="{{this.ImgUrls.[0]}}">
+      <a href="{{this.ProductUrl}}" class="magnifier-thumb-wrapper">
+        <img class="productsImage" src="{{this.ImgUrls.[0]}}" data-large-img-url="{{this.ImgUrls.[0]}}">
       </a>
     </section>
     {{/if}}

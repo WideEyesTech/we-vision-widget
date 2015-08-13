@@ -4,7 +4,9 @@ return templates['product_container.hbs'] = template({"1":function(depth0,helper
   var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression;
   return "    <section class=\"image-container\">\n      <a href=\""
     + escapeExpression(lambda((depth0 != null ? depth0.ProductUrl : depth0), depth0))
-    + "\">\n        <img class=\"productsImage\" src=\""
+    + "\" class=\"magnifier-thumb-wrapper\">\n        <img class=\"productsImage\" src=\""
+    + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.ImgUrls : depth0)) != null ? stack1['0'] : stack1), depth0))
+    + "\" data-large-img-url=\""
     + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.ImgUrls : depth0)) != null ? stack1['0'] : stack1), depth0))
     + "\">\n      </a>\n    </section>\n";
 },"3":function(depth0,helpers,partials,data) {
@@ -28,6 +30,6 @@ return templates['product_container.hbs'] = template({"1":function(depth0,helper
   if (stack1 != null) { buffer += stack1; }
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.ProductCustomData : depth0)) != null ? stack1.price : stack1), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "      </header>\n    </article>\n  </div>\n</div>";
+  return buffer + "      </header>\n    </article>\n  </div>\n</div>\n";
 },"useData":true});
 });

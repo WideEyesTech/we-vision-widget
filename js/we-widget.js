@@ -32,7 +32,7 @@ WeVisionWidget = (function() {
         if (config.mode === 'debug') {
           response = JSON.stringify(response);
           config = JSON.stringify(config);
-          html = '<!DOCTYPE html> <html> <head> <script> var config = ' + config + '; var products = ' + response + '; var product_id = "' + product_id + '"; </script> <link rel="stylesheet" href="css/main.css"> <base target="_blank"/> </head> <body> <section id="widget"></section> <script src="' + scriptSrc + '/vendor/Event/Event.js"></script> <script src="' + scriptSrc + '/vendor/requirejs/require.js"></script> <script src="' + scriptSrc + '/vendor/Magnifier/Magnifier.js"></script> <script src="' + scriptSrc + '/vendor/iframe-resizer/src/iframeResizer.contentWindow.js"></script> <script src="' + scriptSrc + '/main.js"></script> </body> </html>';
+          html = '<!DOCTYPE html> <html> <head> <script> var config = ' + config + '; var products = ' + response + '; var product_id = "' + product_id + '"; </script> <link rel="stylesheet" href="css/main.css"> <base target="_blank"/> </head> <body> <section id="widget"></section> <section id="preview" class="magnifier-preview" style="width: 200px; height: 184px;"></section> <script src="' + scriptSrc + '/vendor/requirejs/require.js"></script> <script src="' + scriptSrc + '/vendor/iframe-resizer/src/iframeResizer.contentWindow.js"></script> <script src="' + scriptSrc + '/main.js"></script> </body> </html>';
         } else if (config.mode === 'production' || !config.mode) {
           response = JSON.stringify(response);
           config = JSON.stringify(config);
@@ -42,7 +42,7 @@ WeVisionWidget = (function() {
             we_vision_internal_src = 'we_vision_internal.min.js';
             css_src = 'we_vision.min.css';
           }
-          html = '<!DOCTYPE html> <html> <head> <script> var config = ' + config + '; var products = ' + response + '; var product_id = "' + product_id + '"; </script> <link rel="stylesheet" href="' + css_src + '"> <base target="_blank"/> </head> <body> <section id="widget"></section> <script src="' + we_vision_internal_src + '"></script> </body> </html>';
+          html = '<!DOCTYPE html> <html> <head> <script> var config = ' + config + '; var products = ' + response + '; var product_id = "' + product_id + '"; </script> <link rel="stylesheet" href="' + css_src + '"> <base target="_blank"/> </head> <body> <section id="widget"></section> <section id="preview" class="magnifier-preview" style="width: 200px; height: 184px;"></section> <script src="' + we_vision_internal_src + '"></script> </body> </html>';
         }
         iframe.contentWindow.document.open();
         iframe.contentWindow.document.write(html);
