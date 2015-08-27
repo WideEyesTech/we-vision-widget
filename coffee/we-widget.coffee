@@ -94,4 +94,5 @@ class WeVisionWidget
 		req.setRequestHeader 'apikey', config.apikey
 		req.setRequestHeader 'Content-Type', 'application/json; charset=UTF-8'
 		req.send JSON.stringify data
+
 weVisionWidget = new WeVisionWidget

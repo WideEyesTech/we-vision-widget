@@ -23,29 +23,26 @@ define (require) ->
     className: 'we-vision-loader'
 
     initialize: ->
+      self = @
       if config and config.mode and config.mode == 'debug'
         console.time("WideEyesWidget")
-
       _.bindAll @
       @render()
 
-    render: ->
+    render: (customConfig) ->
+      $("#widget .we-widget-loader").empty()
       $("#widget").prepend @el
       widget_container = new WidgetContainer
         model: products
         product_id: product_id
-        conf: config
+        conf: customConfig || config
       @$el.append widget_container.render().el
       widget_container.show()
-      @_applyStyling()
+      if customConfig
+        @_applyStyling(customConfig)
+      else
+        @_applyStyling()
       if config.image.magnifier
-        # evt = new Event
-        # m = new Magnifier evt
-        # m.attach {
-        #   thumb: ".productsImage",
-        #   mode: 'inside',
-        #   zoomable: true
-        # }
         @_activateMagnifier()
       @
 
@@ -66,21 +63,31 @@ define (require) ->
           body = eventDoc.body
           event.pageX = event.clientX + (doc and doc.scrollLeft or body and body.scrollLeft or 0) - (doc and doc.clientLeft or body and body.clientLeft or 0)
           event.pageY = event.clientY + (doc and doc.scrollTop or body and body.scrollTop or 0) - (doc and doc.clientTop or body and body.clientTop or 0)
-        prev.offset {top: event.pageY, left: event.pageX - prev.width() / 2}
+        prev.offset {top: event.pageY + 50, left: event.pageX - prev.width() / 2}
 
-    _applyStyling: ->
+    _applyStyling: (customConfig) ->
       style = document.createElement 'style'
       document.head.appendChild style
       @styleSheet = style.sheet
 
-      if config.type
-        @_insertTypeStyles()
-      if config.layout.isCentered
-        $('.grid').css('margin', '0 auto')
-      if config.layout.minColumnCount
-        @_applyCustomLayout(config.layout.minColumnCount, config.layout.responsize)
-      if config.image
-        @_applyCustomImageStyling()
+      if customConfig
+        if customConfig.type
+          @_insertTypeStyles()
+        if customConfig.layout.isCentered
+          $('.grid').css('margin', '0 auto')
+        if customConfig.layout.minColumnCount
+          @_applyCustomLayout(customConfig.layout.minColumnCount, customConfig.layout.responsize)
+        if customConfig.image
+          @_applyCustomImageStyling()
+      else
+        if config.type
+          @_insertTypeStyles()
+        if config.layout.isCentered
+          $('.grid').css('margin', '0 auto')
+        if config.layout.minColumnCount
+          @_applyCustomLayout(config.layout.minColumnCount, config.layout.responsize)
+        if config.image
+          @_applyCustomImageStyling()
 
     _applyCustomImageStyling: () ->
       maxWidth = if config.image["max-width"] then config.image["max-width"] else ''

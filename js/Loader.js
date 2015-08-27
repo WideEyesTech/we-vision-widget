@@ -33,6 +33,8 @@ define(function(require) {
     Loader.prototype.className = 'we-vision-loader';
 
     Loader.prototype.initialize = function() {
+      var self;
+      self = this;
       if (config && config.mode && config.mode === 'debug') {
         console.time("WideEyesWidget");
       }
@@ -40,17 +42,22 @@ define(function(require) {
       return this.render();
     };
 
-    Loader.prototype.render = function() {
+    Loader.prototype.render = function(customConfig) {
       var widget_container;
+      $("#widget .we-widget-loader").empty();
       $("#widget").prepend(this.el);
       widget_container = new WidgetContainer({
         model: products,
         product_id: product_id,
-        conf: config
+        conf: customConfig || config
       });
       this.$el.append(widget_container.render().el);
       widget_container.show();
-      this._applyStyling();
+      if (customConfig) {
+        this._applyStyling(customConfig);
+      } else {
+        this._applyStyling();
+      }
       if (config.image.magnifier) {
         this._activateMagnifier();
       }
@@ -78,28 +85,43 @@ define(function(require) {
           event.pageY = event.clientY + (doc && doc.scrollTop || body && body.scrollTop || 0) - (doc && doc.clientTop || body && body.clientTop || 0);
         }
         return prev.offset({
-          top: event.pageY,
+          top: event.pageY + 50,
           left: event.pageX - prev.width() / 2
         });
       });
     };
 
-    Loader.prototype._applyStyling = function() {
+    Loader.prototype._applyStyling = function(customConfig) {
       var style;
       style = document.createElement('style');
       document.head.appendChild(style);
       this.styleSheet = style.sheet;
-      if (config.type) {
-        this._insertTypeStyles();
-      }
-      if (config.layout.isCentered) {
-        $('.grid').css('margin', '0 auto');
-      }
-      if (config.layout.minColumnCount) {
-        this._applyCustomLayout(config.layout.minColumnCount, config.layout.responsize);
-      }
-      if (config.image) {
-        return this._applyCustomImageStyling();
+      if (customConfig) {
+        if (customConfig.type) {
+          this._insertTypeStyles();
+        }
+        if (customConfig.layout.isCentered) {
+          $('.grid').css('margin', '0 auto');
+        }
+        if (customConfig.layout.minColumnCount) {
+          this._applyCustomLayout(customConfig.layout.minColumnCount, customConfig.layout.responsize);
+        }
+        if (customConfig.image) {
+          return this._applyCustomImageStyling();
+        }
+      } else {
+        if (config.type) {
+          this._insertTypeStyles();
+        }
+        if (config.layout.isCentered) {
+          $('.grid').css('margin', '0 auto');
+        }
+        if (config.layout.minColumnCount) {
+          this._applyCustomLayout(config.layout.minColumnCount, config.layout.responsize);
+        }
+        if (config.image) {
+          return this._applyCustomImageStyling();
+        }
       }
     };
 
