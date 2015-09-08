@@ -18,6 +18,7 @@ define (require) ->
       @_extractModelData()
       if @template
         @setElement @template @_getTemplateData()
+        @_appendTitle()
         @$el.addClass '' # Add hidden class since we'll be making transition-in to visible
       for row in @rows
         products_container = new ProductsContainer
@@ -26,6 +27,15 @@ define (require) ->
           widget_configuration: @widget_configuration
         @$el.append products_container.render().el
       super
+      @
+
+    _appendTitle: () ->
+      h2 = document.createElement 'h2'
+      if @widget_configuration.type.title.text
+        h2.innerHTML = config.type.title.text
+      else
+        h2.innerHTMl = "Similar products"
+      @$el.append h2
       @
 
     show: (callback = ->) ->

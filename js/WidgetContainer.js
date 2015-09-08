@@ -29,6 +29,7 @@ define(function(require) {
       this._extractModelData();
       if (this.template) {
         this.setElement(this.template(this._getTemplateData()));
+        this._appendTitle();
         this.$el.addClass('');
       }
       ref = this.rows;
@@ -42,6 +43,18 @@ define(function(require) {
         this.$el.append(products_container.render().el);
       }
       WidgetContainer.__super__.render.apply(this, arguments);
+      return this;
+    };
+
+    WidgetContainer.prototype._appendTitle = function() {
+      var h2;
+      h2 = document.createElement('h2');
+      if (this.widget_configuration.type.title.text) {
+        h2.innerHTML = config.type.title.text;
+      } else {
+        h2.innerHTMl = "Similar products";
+      }
+      this.$el.append(h2);
       return this;
     };
 
