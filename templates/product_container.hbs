@@ -1,12 +1,14 @@
 <div class="card">
   <div class="inner">
-    {{#if this.ImgUrls}}
     <section class="image-container">
       <a href="{{this.ProductUrl}}" class="magnifier-thumb-wrapper">
-        <img class="productsImage" src="{{this.ImgUrls.[0]}}" data-large-img-url="{{this.ImgUrls.[0]}}">
+        {{#if this.ProductCustomData.thumb_image}}
+        <img class="productsImage" src="{{this.ProductCustomData.thumb_image}}" data-large-img-url="{{this.ImgUrls}}">
+        {{else }}
+        <img class="productsImage" src="{{this.ImgUrls}}" data-large-img-url="{{this.ImgUrls}}">
+        {{/if}}
       </a>
     </section>
-    {{/if}}
     <article class="text-xs-center more-info">
       <header>
         {{#if this.ProductName}}

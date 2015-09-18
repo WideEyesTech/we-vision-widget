@@ -5,6 +5,7 @@
   <title>WE Widget Test Page</title>
   <link rel="stylesheet" href="style.css">
   <link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+  <!-- <script src='js/vendor/iframe-resizer/js/iframeResizer.min.js'></script> -->
 </head>
 
 <body>
@@ -13,25 +14,30 @@
   </header>
   <section class="container">
     <article class="main">
-      <section>
-        <img src="example.jpg" alt="example" width="100%">
+      <section id="product-main-images">
+        <img src="http://static.massimodutti.net/3/photos/2015/I/0/2/p/0715/201/928/0715201928_1_1_17.jpg?6518948946161" alt="example" width="100%">
+        <img src="http://static.massimodutti.net/3/photos/2015/I/0/2/p/0715/201/928/0715201928_2_3_17.jpg?6518948946161" alt="example" width="100%">
       </section>
-      <footer>
-
-      </footer>
     </article>
-    <div id="product-id" class="productSku" style="display: none;">Ref. 0000/215</div>
     <aside class="sidebar">
       <div class="wrapper">
         <div id="vision-widget"></div>
       </div>
+      <ul class="clearfix">
+          <li class="color-thumb selected" data-color-id="928">
+            <p>thumb 1</p>
+          </li>
+          <li class="color-thumb " data-color-id="401">
+            <p>thumb 2</p>
+          </li>
+      </ul>
     </aside>
   </section>
   <script>
-  window.we_vision_product_id = document.getElementById("product-id").innerHTML;
   window.we_vision_config = {
-    "apikey": "5df9331289c39d3b19f06f33c541f88500ecfa2e",
+    "apikey": "853f9a48ab7a28f6e0dc52940f9a5c6d0288736f",
     "widgetContainer": "#vision-widget", // widget container
+    "maxNumProducts": 5,
     "type": {
       "font-family": "'Lato', serif", // base font family
       "color": "#505252", // base text color
@@ -41,11 +47,10 @@
         "url": "http://fonts.googleapis.com/css?family=Lato:400,700" // if url is absolute, it will perform a css @import declaration, otherwise @font-face
       },
       "title": {
-        "text": "Similar products",
-        "transform": "uppercase", // options: [uppercase, capitalize, lowercase]
-        "letter-spacing": 0.13,
-        "font-weight": 400,
-        "font-size": 16,
+        "text": "También te puede gustar",
+        "transform": "capitalize", // options: [uppercase, capitalize, lowercase]
+        "font-weight": 300,
+        "font-size": 21,
         "display": true
       }
     },
@@ -57,12 +62,12 @@
     "layout": {
       "numOfElms": 5,
       "responsize": false, // if true, number of displayed products per row will vary according to the viewport size
-      "isCentered": false, // container to be centered in bigger screens: true or false
-      "minColumnCount": 2 // minimum number of displayed products per row [1, 2, 4, 5, 8]
+      "isCentered": true, // container to be centered in bigger screens: true or false
+      "minColumnCount": 4 // minimum number of displayed products per row [1, 2, 4, 5, 8]
     },
     "image": {
       "magnifier": true,
-      // max-height: 220
+      // "max-height": 120
     },
     "mode": "production" // default is production
   };
@@ -72,8 +77,7 @@
   <script id="we-vision-script" src="build/we_vision_external.min.js"></script>
 
   <!-- debug scripts -->
-  <!-- <script src="js/vendor/iframe-resizer/src/iframeResizer.js"></script> -->
-  <!-- <script id="we-vision-script" src="js/we-widget.js"></script> -->
+  <!-- <script src="js/we_vision_external.js"></script> -->
 </body>
 
 </html>

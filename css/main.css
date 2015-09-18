@@ -13,6 +13,10 @@
 @import "lists.css";
 @import "colors.css";
 
+body {
+  overflow: hidden;
+}
+
 .grid {
   overflow: visible;
 }
@@ -46,6 +50,10 @@
   margin-top: 30%;
 }
 
+.card article.more-info header h1 {
+  padding: 15px;
+}
+
 .card .inner .image-container {
   position: relative;
 }
@@ -56,11 +64,8 @@
   max-width: 100%;
 }
 
-/*
-.card img.expanded {
-  z-index: 1;
+#preview {
   position: absolute;
-  max-width: 250% !important;
-  max-height: initial !important;
-  transition: .2s max-width ease-in-out;
-}*/
+  top: 0;
+  left: -100%;
+}
