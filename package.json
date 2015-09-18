@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "build": "gulp webpack"
+    "build": "gulp webpack",
+    "test": "wdio"
   },
   "author": "Miguel Pousa <miguelpousafreire@gmail.com> && Gerard Clos <gerard@wide-eyes.it>",
   "private": true,
@@ -28,6 +29,7 @@
     "gulp-webpack": "~1.5.0",
     "gulp-clean-css": "~1.0.2",
     "gulp-rename": "~1.2.2",
-    "gulp-concat": "~2.6.0"
+    "webdriverio": "~3.2.4",
+    "jasmine": "~2.3.2"
   }
 }

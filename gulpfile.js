@@ -2,7 +2,6 @@ var gulp = require("gulp");
 var gutil = require("gulp-util");
 var webpack = require("webpack");
 var rename = require("gulp-rename");
-var concat = require("gulp-concat");
 var minify = require("gulp-clean-css");
 var webpackGulp = require("gulp-webpack");
 var webpack = require("webpack-dev-server");
