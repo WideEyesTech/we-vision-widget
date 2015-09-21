@@ -31,45 +31,50 @@ define(function(require) {
     Loader.prototype.className = 'we-widget-loader';
 
     Loader.prototype.initialize = function() {
-      if (config && config.mode && config.mode === 'debug') {
+      if (glbWeConfig && glbWeConfig.mode && glbWeConfig.mode === 'debug') {
         console.time("WideEyesWidget");
       }
       _.bindAll(this);
       return this.render();
     };
 
-    Loader.prototype.render = function() {
+    Loader.prototype.render = function(customConfig) {
       var widget_container;
+      $("#widget .we-widget-loader").empty();
       $("#widget").prepend(this.el);
       widget_container = new WidgetContainer({
         model: products,
         product_id: product_id,
-        conf: config
+        conf: customConfig || glbWeConfig
       });
       this.$el.append(widget_container.render().el);
       widget_container.show();
-      this._applyStyling();
+      if (customConfig) {
+        this._applyStyling(customConfig);
+      } else {
+        this._applyStyling(glbWeConfig);
+      }
       return this;
     };
 
-    Loader.prototype._applyStyling = function() {
+    Loader.prototype._applyStyling = function(config) {
       if (config.layout.isCentered) {
         $('.grid').css('margin', '0 auto');
       }
       if (config.type) {
-        this._insertTypeStyles();
+        this._insertTypeStyles(config.type);
       }
       if (config.layout.columnCount) {
-        return this._applyCustomLayout(config.layout.columnCount);
+        return this._applyCustomLayout(config);
       }
     };
 
-    Loader.prototype._applyCustomLayout = function(colCount) {
+    Loader.prototype._applyCustomLayout = function(config) {
       var cardRule, imgRule, mediaRule, style, styleSheet;
       style = document.getElementsByTagName('style');
       styleSheet = style[0].sheet;
       $('.card').addClass('col-xs-1-' + config.layout.mobileColumnCount);
-      if (colCount === 8) {
+      if (config.layout.columnCount === 8) {
         $('.card').addClass('col-sm-1-2 col-md-1-4 col-lg-1-8');
         $('.grid').css('max-width', '1600px');
         cardRule = '.card { height: 300px; }';
@@ -77,8 +82,8 @@ define(function(require) {
         mediaRule = '@media (min-width: 1024px) { .card { height: auto; } .image-container img { max-height: none; } }';
         styleSheet.insertRule(mediaRule, 0);
         styleSheet.insertRule(cardRule, 0);
-        return styleSheet.insertRule(imgRule, 0);
-      } else if (colCount === 4) {
+        styleSheet.insertRule(imgRule, 0);
+      } else if (config.layout.columnCount === 4) {
         $('.card').addClass('col-sm-1-2 col-md-1-4');
         $('.grid').css('max-width', '1024px');
         cardRule = '.card { height: 300px; }';
@@ -86,8 +91,8 @@ define(function(require) {
         mediaRule = '@media (min-width: 768px) { .card { height: auto; } .image-container img{ max-height: none; } }';
         styleSheet.insertRule(mediaRule, 0);
         styleSheet.insertRule(cardRule, 0);
-        return styleSheet.insertRule(imgRule, 0);
-      } else if (colCount === 2) {
+        styleSheet.insertRule(imgRule, 0);
+      } else if (config.layout.columnCount === 2) {
         $('.card').addClass(' col-sm-1-2');
         $('.grid').css('max-width', '768px');
         cardRule = '.card { height: 300px; }';
@@ -95,10 +100,10 @@ define(function(require) {
         mediaRule = '@media (min-width: 550px) { .card { height: auto; } .image-container img { max-height: none; } }';
         styleSheet.insertRule(mediaRule, 0);
         styleSheet.insertRule(cardRule, 0);
-        return styleSheet.insertRule(imgRule, 0);
-      } else if (colCount === 1) {
+        styleSheet.insertRule(imgRule, 0);
+      } else if (config.layout.columnCount === 1) {
         $('.card').addClass(' col-sm-1-1');
-        return $('.grid').css('max-width', '550px');
+        $('.grid').css('max-width', '550px');
       } else {
         $('.card').addClass(' col-sm-1-2 col-md-1-4');
         $('.grid').css('max-width', '1024px');
@@ -107,19 +112,21 @@ define(function(require) {
         mediaRule = '@media (min-width: 768px) { .card { height: auto; } .image-container img{ max-height: none; } }';
         styleSheet.insertRule(mediaRule, 0);
         styleSheet.insertRule(cardRule, 0);
-        return styleSheet.insertRule(imgRule, 0);
+        styleSheet.insertRule(imgRule, 0);
+      }
+      if (!config.layout.hasTitle) {
+        return $('.grid > h2').css('display', 'none');
       }
     };
 
-    Loader.prototype._insertTypeStyles = function() {
-      var configType, fontColor, fontFamily, fontSize, style, styleSheet, typeRule;
+    Loader.prototype._insertTypeStyles = function(type) {
+      var fontColor, fontFamily, fontSize, style, styleSheet, typeRule;
       style = document.createElement('style');
       document.head.appendChild(style);
       styleSheet = style.sheet;
-      configType = config.type ? config.type : null;
-      fontFamily = configType && configType['font-family'] ? configType['font-family'] : '';
-      fontSize = configType && configType['font-size'] ? configType['font-size'] : '';
-      fontColor = configType && configType['color'] ? configType['color'] : '';
+      fontFamily = type && type['font-family'] ? type['font-family'] : '';
+      fontSize = type && type['font-size'] ? type['font-size'] : '';
+      fontColor = type && type['color'] ? type['color'] : '';
       typeRule = 'body { font-family: ' + fontFamily + '; font-size: ' + fontSize + 'px; color: ' + fontColor + '; }';
       return styleSheet.insertRule(typeRule, 0);
     };

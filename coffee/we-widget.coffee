@@ -5,15 +5,15 @@ scriptSrc = scriptSrc.substring 0, scriptSrc.lastIndexOf('/')
 
 product_id = window.wide_eyes_product_id
 config = window.wide_eyes_config
-data = 
+data =
 	ProductId: product_id
 	MinNumResults: config.numberOfElements + 1 || 5
 
 
-req = new XMLHttpRequest()	
-req.addEventListener 'readystatechange', -> 
-	if req.readyState is 4 and req.status == 200 
-		
+req = new XMLHttpRequest()
+req.addEventListener 'readystatechange', ->
+	if req.readyState is 4 and req.status == 200
+
 		# delete first product from results (it's the same than product_id)
 		response = JSON.parse(req.responseText)
 		response.result_both.splice 0, 2
@@ -26,21 +26,21 @@ req.addEventListener 'readystatechange', ->
 		iframe.setAttribute 'frameborder', 'no'
 		iframe.setAttribute 'scrolling', 'no'
 		iframe.setAttribute 'onload', 'iFrameResize({checkOrigin: false}, "#we-iframe")'
-    
+
 		widget = document.querySelector config.widgetPositionAfter
 		widget.appendChild iframe
-		
+
 		if config.mode == 'debug'
 			# have to be stringified so to pass them to the html string
-			response = JSON.stringify response 
+			response = JSON.stringify response
 			config = JSON.stringify(config)
-			html = 
+			html =
 				'<!DOCTYPE html>
 				<html>
 					<head>
 					    <script>
 					    	var products = '+response+';
-							var config = '+config+';
+							var glbWeConfig = '+config+';
 							var product_id = "'+product_id+'";
 					    </script>
 						<link rel="stylesheet" href="'+scriptSrc+'/css/main.css">
@@ -56,18 +56,15 @@ req.addEventListener 'readystatechange', ->
 		else if config.mode == 'production' or !config.mode
 			response = JSON.stringify response
 			config = JSON.stringify(config)
-			css_src = scriptSrc+'/main.min.css'
-			main_internal_src = scriptSrc + '/main_internal.min.js'
-			if (scriptSrc == '')
-				main_internal_src = 'main_internal.min.js'
-				css_src = 'main.min.css'
-			html = 
+			css_src = scriptSrc+'/weVisionWidget_internal.min.css'
+			weVisionWidget_src = scriptSrc + '/weVisionWidget_internal.min.js'
+			html =
 				'<!DOCTYPE html>
 				<html>
 					<head>
 					    <script>
 					    	var products = '+response+';
-							var config = '+config+';
+							var glbWeConfig = '+config+';
 							var product_id = "'+product_id+'";
 					    </script>
 						<link rel="stylesheet" href="'+css_src+'">
@@ -75,7 +72,7 @@ req.addEventListener 'readystatechange', ->
 					</head>
 					<body>
 						<section id="widget"></section>
-						<script src="'+main_internal_src+'"></script>
+						<script src="'+weVisionWidget_src+'"></script>
 					</body>
 				</html>'
 

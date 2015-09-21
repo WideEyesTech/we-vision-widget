@@ -19,7 +19,7 @@ data = {
 req = new XMLHttpRequest();
 
 req.addEventListener('readystatechange', function() {
-  var css_src, html, iframe, main_internal_src, response, widget;
+  var css_src, html, iframe, response, weVisionWidget_src, widget;
   if (req.readyState === 4 && req.status === 200) {
     response = JSON.parse(req.responseText);
     response.result_both.splice(0, 2);
@@ -35,17 +35,13 @@ req.addEventListener('readystatechange', function() {
     if (config.mode === 'debug') {
       response = JSON.stringify(response);
       config = JSON.stringify(config);
-      html = '<!DOCTYPE html> <html> <head> <script> var products = ' + response + '; var config = ' + config + '; var product_id = "' + product_id + '"; </script> <link rel="stylesheet" href="' + scriptSrc + '/css/main.css"> <base target="_blank"/> </head> <body> <section id="widget"></section> <script src="' + scriptSrc + '/vendor/requirejs/require.js"></script> <script src="' + scriptSrc + '/vendor/iframe-resizer/src/iframeResizer.contentWindow.js"></script> <script src="' + scriptSrc + '/main.js"></script> </body> </html>';
+      html = '<!DOCTYPE html> <html> <head> <script> var products = ' + response + '; var glbWeConfig = ' + config + '; var product_id = "' + product_id + '"; </script> <link rel="stylesheet" href="' + scriptSrc + '/css/main.css"> <base target="_blank"/> </head> <body> <section id="widget"></section> <script src="' + scriptSrc + '/vendor/requirejs/require.js"></script> <script src="' + scriptSrc + '/vendor/iframe-resizer/src/iframeResizer.contentWindow.js"></script> <script src="' + scriptSrc + '/main.js"></script> </body> </html>';
     } else if (config.mode === 'production' || !config.mode) {
       response = JSON.stringify(response);
       config = JSON.stringify(config);
-      css_src = scriptSrc + '/main.min.css';
-      main_internal_src = scriptSrc + '/main_internal.min.js';
-      if (scriptSrc === '') {
-        main_internal_src = 'main_internal.min.js';
-        css_src = 'main.min.css';
-      }
-      html = '<!DOCTYPE html> <html> <head> <script> var products = ' + response + '; var config = ' + config + '; var product_id = "' + product_id + '"; </script> <link rel="stylesheet" href="' + css_src + '"> <base target="_blank"/> </head> <body> <section id="widget"></section> <script src="' + main_internal_src + '"></script> </body> </html>';
+      css_src = scriptSrc + '/weVisionWidget_internal.min.css';
+      weVisionWidget_src = scriptSrc + '/weVisionWidget_internal.min.js';
+      html = '<!DOCTYPE html> <html> <head> <script> var products = ' + response + '; var glbWeConfig = ' + config + '; var product_id = "' + product_id + '"; </script> <link rel="stylesheet" href="' + css_src + '"> <base target="_blank"/> </head> <body> <section id="widget"></section> <script src="' + weVisionWidget_src + '"></script> </body> </html>';
     }
     iframe.contentWindow.document.open();
     iframe.contentWindow.document.write(html);

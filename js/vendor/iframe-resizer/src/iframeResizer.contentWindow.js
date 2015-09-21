@@ -704,9 +704,7 @@
 					resizeFromParent();
 					break;
 				default:
-					if (!isMiddleTier()){
-						warn('Unexpected message ('+event.data+')');
-					}
+					// do nothing
 				}
 			} else if (isInitMsg()) {
 				initFromParent();

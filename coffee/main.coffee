@@ -1,4 +1,3 @@
-console.log products
 require.config
   baseUrl: 'js'
   map:
@@ -25,12 +24,14 @@ require.config
       deps: []
   waitSeconds: 10
 
+
 # Must also manually require all partials otherwise they don't get loaded :/
 #require.config
 #  context: 'WideEyesWidget'
-require [
-  'jquery'
-  'Loader'
-], ($, Loader) ->
-  $ ->
-    new Loader
+require ['jquery', 'Loader' ], ($, Loader) ->
+    loader = new Loader
+    $ -> loader
+
+    window.onmessage = (e) ->
+      if e.data.message == 'we-reload' and e.data.customConfig
+        loader.render(e.data.customConfig)

@@ -1,0 +1,71 @@
+/*
+  ******************
+  IFRAME CSS STYLING
+  ******************
+*/
+@import "magnifier.css";
+@import "normalize.css";
+
+@import "base.css";
+@import "type.css";
+@import "grid.css";
+@import "misc.css";
+@import "lists.css";
+@import "colors.css";
+
+body {
+  overflow: hidden;
+}
+
+.grid {
+  overflow: visible;
+}
+
+.grid > h2 {
+  padding-left: 5px;
+}
+
+.card {
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.card article.more-info {
+  transition: top .2s ease-out;
+  background-color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 100%;
+  left: 0;
+}
+
+.card.hover article.more-info {
+  transition: .2s top ease-out;
+  top: 0;
+}
+
+.card article.more-info header {
+  margin-top: 30%;
+}
+
+.card article.more-info header h1 {
+  padding: 15px;
+}
+
+.card .inner .image-container {
+  position: relative;
+}
+
+.card .inner .image-container > a > img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+#preview {
+  position: absolute;
+  top: 0;
+  left: -100%;
+}
