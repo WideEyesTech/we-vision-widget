@@ -1,45 +1,97 @@
-define (require) ->
+Backbone = require 'backbone'
+_ = require 'underscore'
+$ = require 'jquery'
 
-  Backbone = require 'backbone'
-  $ = require 'jquery'
-  _ = require 'underscore'
+class ProductContainer extends Backbone.View
+  self = this
+  template: require '../templates/product_container.hbs'
 
-  class ProductContainer extends Backbone.View
-    template: require 'templates/product_container'
+  events:
+    'click a': '_onClick'
 
-    events:
-      'click a': '_onClick'
+  initialize: (options)->
+    @config = options.widget_configuration
+    @product_id = options.product_id
 
-    initialize: (options)->
-      @config = options.widget_configuration
-      @product_id = options.product_id
-      @
+  render: ->
+    if @template
+      @setElement @template @_getTemplateData()
+      @$el.addClass ''
+      if @config.tile.display
+        @$el.mouseenter(_onMouseEnter)
+        @$el.mouseleave(_onMouseLeave)
+    @_finishImpression()
+    @
 
-    render: ->
-      if @template
-        @setElement @template @_getTemplateData()
-        @$el.addClass '' # Add hidden class since we'll be making transition-in to visible
-        # TODO: add col classes depending on columncount
-      super
-      @
+  _finishImpression: ->
+    # make api call
+    headers = {}
+    headers.apikey = @config.apikey
 
-    _onClick: ->
-      # call statistics/registerClick
-      headers = {}
-      headers.apikey = @config.apikey
-      $.ajax
-        method: "POST",
-        url: "http://api.wide-eyes.it/widget/clicks",
-        data: '{}'
-        dataType: 'json'
-        contentType: 'application/json; charset=UTF-8'
-        headers: 
-          headers
-        crossDomain: true
-        processData: false
-        error: (error) =>
-          console.log(error)
-        success: (response) =>
-        
-    _getTemplateData: ->
-      @model
+    $.ajax
+      method: "POST",
+      url: "http://api-mirror.wide-eyes.it/widget/impressions/product",
+      data: JSON.stringify({
+        page_product_id: @product_id,
+        target_product_id: @model.ProductId
+      }),
+      dataType: 'json'
+      contentType: 'application/json; charset=UTF-8'
+      headers:
+        headers
+      crossDomain: true
+      processData: false
+      error: (error) =>
+        console.warn(error)
+      success: (response)=>
+
+
+  _onClick: ->
+    # call statistics/registerClick
+    headers = {}
+    headers.apikey = @config.apikey
+    @_genericClickCall(headers)
+    @_targetClickCall(@model.ProductId, @product_id, headers)
+    @
+
+  _genericClickCall: (headers) ->
+    $.ajax
+      method: "POST",
+      url: "http://api-mirror.wide-eyes.it/widget/clicks",
+      data: '{}',
+      dataType: 'json'
+      contentType: 'application/json; charset=UTF-8'
+      headers:
+        headers
+      crossDomain: true
+      processData: false
+      error: (error) =>
+        console.warn(error)
+      success: (response)=>
+
+  _targetClickCall: (targetId, ProductId, headers) ->
+    $.ajax
+      method: "POST",
+      url: "http://api-mirror.wide-eyes.it/widget/clicks/product",
+      data: JSON.stringify({
+        page_product_id: ProductId,
+        target_product_id: targetId
+      }),
+      dataType: 'json'
+      contentType: 'application/json; charset=UTF-8'
+      headers:
+        headers
+      crossDomain: true
+      processData: false
+      error: (error) =>
+        console.warn(error)
+      success: (response)=>
+
+  _getTemplateData: ->
+    @model
+
+_onMouseLeave = (ev) ->
+  ev.currentTarget.className = ev.currentTarget.className.replace " hover", ""
+
+_onMouseEnter = (ev) ->
+  ev.currentTarget.className += " hover"

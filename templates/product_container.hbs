@@ -1,30 +1,25 @@
 <div class="card">
   <div class="inner">
-    {{#if this.ImgUrls}}
     <section class="image-container">
-      <a href="{{this.ProductUrl}}">
-        <img class="productsImage" src="{{this.ImgUrls.[0]}}">
+      <a href="{{this.ProductUrl}}" class="magnifier-thumb-wrapper">
+        {{#if this.ProductCustomData.thumb_image}}
+        <img class="productsImage" src="{{this.ProductCustomData.thumb_image}}" data-large-img-url="{{this.ImgUrls}}">
+        {{else }}
+        <img class="productsImage" src="{{this.ImgUrls}}" data-large-img-url="{{this.ImgUrls}}">
+        {{/if}}
       </a>
-      {{!-- {{#if this.ProductCustomData.description}}
-      <section class="hover-all text-center product-description">
-        <p>
-          <small>{{this.ProductCustomData.description}}</small>
-        </p>
-      </section>
-      {{/if}} --}}
     </section>
-    {{/if}}
-    <article class="text-xs-center text-md-left">
+    <article class="text-xs-center more-info">
       <header>
         {{#if this.ProductName}}
-        <h4 class="product-title bold">
-          {{this.ProductName}}
-        </h4>
+        <h1 class="product-title">
+            <a href="{{this.ProductUrl}}">{{this.ProductName}}</a>
+        </h1>
+        {{/if}}
+        {{#if this.ProductCustomData.price}}
+         <h3>{{this.ProductCustomData.price}} &euro;</h3>
         {{/if}}
       </header>
-      {{#if this.ProductCustomData.price}}
-       <p>{{this.ProductCustomData.price}} &euro;</p>
-      {{/if}}
     </article>
   </div>
 </div>
