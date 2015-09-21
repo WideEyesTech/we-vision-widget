@@ -1,0 +1,7 @@
+we-vision-widget.sublime-project
+we-vision-widget.sublime-workspace
+build/*
+node_modules/*
+.DS_STORE
+index.html
+style.css

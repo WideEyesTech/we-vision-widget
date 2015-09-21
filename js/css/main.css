@@ -1,0 +1,48 @@
+/*
+	******************
+	IFRAME CSS STYLING
+	******************
+*/
+@import "normalize.css";
+
+@import "base.css";
+@import "type.css";
+@import "grid.css";
+@import "colors.css";
+@import "lists.css";
+@import "misc.css";
+
+/* CUSTOM CSS */
+.image-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.image-container img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.product-description {
+  padding: 1em;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.product-description p {
+  margin-top: 10%;
+}
+
+.product-title {
+  margin-top: .2em;
+}
+
+.card {
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.grid .row:last-child .card {
+  margin-bottom: 0;
+}

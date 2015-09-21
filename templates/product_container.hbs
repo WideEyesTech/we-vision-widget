@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="inner">
+    <section class="image-container">
+      <a href="{{this.ProductUrl}}" class="magnifier-thumb-wrapper">
+        {{#if this.ProductCustomData.thumb_image}}
+        <img class="productsImage" src="{{this.ProductCustomData.thumb_image}}" data-large-img-url="{{this.ImgUrls}}">
+        {{else }}
+        <img class="productsImage" src="{{this.ImgUrls}}" data-large-img-url="{{this.ImgUrls}}">
+        {{/if}}
+      </a>
+    </section>
+    <article class="text-xs-center more-info">
+      <header>
+        {{#if this.ProductName}}
+        <h1 class="product-title">
+            <a href="{{this.ProductUrl}}">{{this.ProductName}}</a>
+        </h1>
+        {{/if}}
+        {{#if this.ProductCustomData.price}}
+         <h3>{{this.ProductCustomData.price}} &euro;</h3>
+        {{/if}}
+      </header>
+    </article>
+  </div>
+</div>
