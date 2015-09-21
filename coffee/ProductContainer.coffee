@@ -91,7 +91,7 @@ class ProductContainer extends Backbone.View
     @model
 
 _onMouseLeave = (ev) ->
-ev.currentTarget.className = ev.currentTarget.className.replace " hover", ""
+  ev.currentTarget.className = ev.currentTarget.className.replace " hover", ""
 
 _onMouseEnter = (ev) ->
-ev.currentTarget.className += " hover"
+  ev.currentTarget.className += " hover"

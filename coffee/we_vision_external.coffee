@@ -2,8 +2,9 @@ if typeof iFrameResize is 'undefined' then require '../js/vendor/iframe-resizer/
 
 weVisionInterval = window.setInterval () ->
 		pd = document.getElementById 'product-main-images'
+		si = document.getElementById 'sliderinner'
 
-		if pd
+		if pd or si
 			clearInterval weVisionInterval
 			weVisionWidget = new WeVisionWidget
 			colors = document.getElementsByClassName 'color-thumb'
@@ -110,7 +111,17 @@ class WeVisionWidget
 
 	getProductId:  () ->
 		date = new Date()
-		src = document.getElementById('product-main-images').children[0].src;
+
+		pd = document.getElementById 'product-main-images'
+		si = document.getElementById 'sliderinner'
+
+		if pd
+			src = pd.children[0].src;
+		else if si
+			src = si.children[0].children[0].src;
+		else
+			return
+
 		src = src.split('/');
 		id = ''
 		for i in [5..src.length-1]
