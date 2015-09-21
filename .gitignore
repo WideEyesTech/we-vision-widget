@@ -3,8 +3,5 @@ we-vision-widget.sublime-workspace
 build/*
 node_modules/*
 .DS_STORE
-<<<<<<< HEAD
-=======
 index.html
 style.css
->>>>>>> 389664fa5207826a8d50ebee37d469cf704ffe94
