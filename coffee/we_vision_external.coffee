@@ -1,29 +1,7 @@
 if typeof iFrameResize is 'undefined' then require '../js/vendor/iframe-resizer/src/iframeResizer'
 
-weVisionInterval = window.setInterval () ->
-		pd = document.getElementById 'product-main-images'
-		si = document.getElementById 'sliderinner'
-
-		if pd or si
-			clearInterval weVisionInterval
-			weVisionWidget = new WeVisionWidget
-			colors = document.getElementsByClassName 'color-thumb'
-			for color in colors
-				color.addEventListener 'click', () ->
-					productId = weVisionWidget.getProductId()
-					weVisionWidget.getProducts productId, (err, response) ->
-						if err
-							return
-						document.getElementById('we-vision-iframe').contentWindow.postMessage {
-								name: "we-reload",
-								data:
-									productId: productId,
-									products: response
-							}, "*"
-	100
-
 class WeVisionWidget
-	API_URL = 'http://api-mirror.wide-eyes.it'
+	API_URL = 'http://api.wide-eyes.it'
 	config = window.we_vision_config
 	lastIdSearch = null
 	iframe: null
@@ -66,7 +44,6 @@ class WeVisionWidget
 						    	var products = '+response+';
 									var product_id = "'+product_id+'";
 						    </script>
-							<link rel="stylesheet" href="js/css/main.css">
 							<base target="_blank"/>
 						</head>
 						<body>
@@ -80,8 +57,7 @@ class WeVisionWidget
 			else if config.mode == 'production' or !config.mode
 				response = JSON.stringify response
 				config = JSON.stringify(config)
-				css_src = 'https://d7ljuhq7463v2.cloudfront.net/client-files/183/current/we_vision.min.css'
-				we_vision_internal_src = 'https://d7ljuhq7463v2.cloudfront.net/client-files/183/current/we_vision_internal.min.js'
+				we_vision_internal_src = 'build/we_vision_internal.min.js'
 				html =
 					'<!DOCTYPE html>
 					<html>
@@ -91,7 +67,6 @@ class WeVisionWidget
 							    var products = '+response+';
 									var product_id = "'+product_id+'";
 						    </script>
-							<link rel="stylesheet" href="'+css_src+'">
 							<base target="_blank"/>
 						</head>
 						<body>
@@ -110,26 +85,8 @@ class WeVisionWidget
 		@iframe.contentWindow.postMessage(msg, "*");
 
 	getProductId:  () ->
-		date = new Date()
-
-		pd = document.getElementById 'product-main-images'
-		si = document.getElementById 'sliderinner'
-
-		if pd
-			src = pd.children[0].src;
-		else if si
-			src = si.children[0].children[0].src;
-		else
-			return
-
-		src = src.split('/');
-		id = ''
-		for i in [5..src.length-1]
-			if i is 5
-				id = src[i]
-			else
-				id = id + '/' + src[i]
-		id = id.substring 0, id.indexOf '?'
+		idCont = document.querySelector config.productIdContainer
+		id = idCont.innerHTML
 
 	getProducts:  (id, callback) ->
 		if id isnt @lastIdSearch
@@ -160,3 +117,5 @@ class WeVisionWidget
 			req.send JSON.stringify data
 		else
 			null
+
+weVisionWidget = new WeVisionWidget

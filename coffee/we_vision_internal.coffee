@@ -1,3 +1,4 @@
+require '../css/main.css'
 require '../js/vendor/iframe-resizer/src/iframeResizer.contentWindow'
 
 $ = require 'jquery'
