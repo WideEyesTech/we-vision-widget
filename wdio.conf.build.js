@@ -1,6 +1,23 @@
 exports.config = {
 
   //
+  // =================
+  // Service Providers
+  // =================
+  // WebdriverIO supports Sauce Labs, Browserstack and Testing Bot (other cloud providers
+  // should work too though). These services define specific user and key (or access key)
+  // values you need to put in here in order to connect to these services.
+  //
+  user: process.env.SAUCE_USERNAME,
+  key: process.env.SAUCE_ACCESS_KEY,
+
+  //
+  // If you are using Sauce Labs, WebdriverIO takes care to update the job information
+  // once the test is done. This option is set to `true` by default.
+  //
+  updateJob: true,
+
+  //
   // ==================
   // Specify Test Files
   // ==================
@@ -29,9 +46,16 @@ exports.config = {
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
   // https://docs.saucelabs.com/reference/platforms-configurator
   //
-  capabilities: [{
-    browserName: 'chrome'
-  }],
+  capabilities: {
+    chrome: {
+      desiredCapabilities: {
+        browserName: 'chrome',
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+        name: 'main',
+        build: process.env.TRAVIS_BUILD_NUMBER
+      }
+    }
+  },
   //
   // ===================
   // Test Configurations
@@ -49,10 +73,10 @@ exports.config = {
   //
   // Set a base URL in order to shorten url command calls. If your url parameter starts
   // with "/", the base url gets prepended.
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'http://localhost:80',
   //
   // Default timeout for all waitForXXX commands.
-  waitforTimeout: 10000,
+  waitforTimeout: 5000,
   //
   // Initialize the browser instance with a WebdriverIO plugin. The object should have the
   // plugin name as key and the desired plugin options as property. Make sure you have
