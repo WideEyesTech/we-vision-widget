@@ -46,12 +46,16 @@ exports.config = {
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
   // https://docs.saucelabs.com/reference/platforms-configurator
   //
-  desiredCapabilities: [{
-    browserName: 'chrome',
-    'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
-    name: 'main',
-    build: process.env.TRAVIS_BUILD_NUMBER
-  }],
+  capabilities: {
+    chrome: {
+      desiredCapabilities: {
+        browserName: 'chrome',
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+        name: 'main',
+        build: process.env.TRAVIS_BUILD_NUMBER
+      }
+    }
+  },
   //
   // ===================
   // Test Configurations
