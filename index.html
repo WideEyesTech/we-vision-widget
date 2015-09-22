@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+  <title>WE Widget Test Page</title>
+</head>
+
+<body>
+  <header>
+    <h1>Massimo Dutti</h1>
+  </header>
+  <section class="container">
+    <article class="main">
+    <span id="productId" style="display: none">1JB22D003-K11</span>
+      <section id="product-main-images">
+        <img src="http://we-feed.s3.amazonaws.com/samples/wideEyes/images/1JB22D003-K11.jpg" alt="example" width="100%">
+      </section>
+    </article>
+    <aside class="sidebar">
+      <div class="wrapper">
+        <div id="vision-widget"></div>
+      </div>
+    </aside>
+  </section>
+  <script>
+  // Configure the api_key and the product_id and the rest of the parameters.
+  window.we_vision_config = {
+    "apikey": "ba96d34f27f1d94853445530e1bee5495a7109fe",
+    "productIdContainer": "#productId",
+    "widgetContainer": "#vision-widget", // widget container
+    "maxNumProducts": 4,
+    "type": {
+      "font-family": "'Lato', serif", // base font family
+      "color": "#505252", // base text color
+      "font-size": 12, // base font-size
+      "font-face": {
+        "name": "Lato",
+        "url": "http://fonts.googleapis.com/css?family=Lato:400,700" // if url is absolute, it will perform a css @import declaration, otherwise @font-face
+      },
+      "title": {
+        "text": "Completa tu look",
+        "transform": "capitalize", // options: [uppercase, capitalize, lowercase]
+        "font-weight": 300,
+        "font-size": 21,
+        "display": true
+      }
+    },
+    "tile": {
+      "display": true,
+      "hasTitle": true,
+      "hasPrice": false
+    },
+    "layout": {
+      "numOfElms": 5,
+      "responsize": false, // if true, number of displayed products per row will vary according to the viewport size
+      "isCentered": false, // container to be centered in bigger screens: true or false
+      "minColumnCount": 2 // minimum number of displayed products per row [1, 2, 4, 5, 8]
+    },
+    "image": {
+      "magnifier": false,
+      // "max-height": 120
+    },
+    "mode": "production" // default is production
+  };
+  </script>
+
+  <!-- production script -->
+  <script id="we-vision-script" src="build/we_vision_external.min.js"></script>
+  <!-- debug scripts -->
+  <!-- <script id="we-vision-script" src="js/we_vision_loader.js"></script> -->
+</body>
+
+</html>
