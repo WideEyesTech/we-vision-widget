@@ -2,22 +2,20 @@ var request = require('supertest');
 var express = require('express');
 var app = express();
 
-app.get('/', function(req, res) {
-  res.sendStatus(200);
-});
+app.get('/');
 app.listen('3000');
 app.use(express.static(__dirname));
 
 describe('main test', function () {
-    it('should return 200', function(done) {
-      request(app)
-        .get('/')
-        .expect(200)
-        .end(function(err, res){
-          if (err) throw err;
-          done();
-        });
-    });
+    // it('should return 200', function(done) {
+    //   request(app)
+    //     .get('/')
+    //     .expect(200)
+    //     .end(function(err, res){
+    //       if (err) throw err;
+    //       done();
+    //     });
+    // });
 
     it('should check iframe is loaded with content', function (done) {
       browser
