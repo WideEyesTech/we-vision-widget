@@ -16,8 +16,6 @@ isPortTaken(3000, function (err, bool) {
   }
 });
 
-module.exports = app;
-
 function isPortTaken(port, fn) {
   var net = require('net')
   var tester = net.createServer()

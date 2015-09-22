@@ -1,21 +1,7 @@
-var app = require('../server.js');
+// var app = require('../server.js');
 var request = require('supertest');
 
 describe('main test', function () {
-  it('should return 200', function (done) {
-    if (app) {
-      request(app)
-        .get('/')
-        .expect(200)
-        .end(function (err, res) {
-          if (err) throw err;
-          done();
-        });
-    } else {
-      done();
-    }
-  });
-
   it('should check iframe is loaded with content', function (done) {
     browser
       .url('/')
