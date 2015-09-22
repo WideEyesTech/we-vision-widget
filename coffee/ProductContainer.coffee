@@ -1,13 +1,12 @@
 Backbone = require 'backbone'
-_ = require 'underscore'
 $ = require 'jquery'
 
 class ProductContainer extends Backbone.View
   self = this
   template: require '../templates/product_container.hbs'
 
-  events:
-    'click a': '_onClick'
+  # events:
+  #   'click a': '_onClick'
 
   initialize: (options)->
     @config = options.widget_configuration
@@ -20,7 +19,7 @@ class ProductContainer extends Backbone.View
       if @config.tile.display
         @$el.mouseenter(_onMouseEnter)
         @$el.mouseleave(_onMouseLeave)
-    @_finishImpression()
+    # @_finishImpression()
     @
 
   _finishImpression: ->
@@ -30,7 +29,7 @@ class ProductContainer extends Backbone.View
 
     $.ajax
       method: "POST",
-      url: "http://api-mirror.wide-eyes.it/widget/impressions/product",
+      url: "http://api.wide-eyes.it/widget/impressions/product",
       data: JSON.stringify({
         page_product_id: @product_id,
         target_product_id: @model.ProductId
@@ -57,7 +56,7 @@ class ProductContainer extends Backbone.View
   _genericClickCall: (headers) ->
     $.ajax
       method: "POST",
-      url: "http://api-mirror.wide-eyes.it/widget/clicks",
+      url: "http://api.wide-eyes.it/widget/clicks",
       data: '{}',
       dataType: 'json'
       contentType: 'application/json; charset=UTF-8'
@@ -72,7 +71,7 @@ class ProductContainer extends Backbone.View
   _targetClickCall: (targetId, ProductId, headers) ->
     $.ajax
       method: "POST",
-      url: "http://api-mirror.wide-eyes.it/widget/clicks/product",
+      url: "http://api.wide-eyes.it/widget/clicks/product",
       data: JSON.stringify({
         page_product_id: ProductId,
         target_product_id: targetId
@@ -95,3 +94,5 @@ _onMouseLeave = (ev) ->
 
 _onMouseEnter = (ev) ->
   ev.currentTarget.className += " hover"
+
+module.exports = ProductContainer

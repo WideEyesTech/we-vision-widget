@@ -1,4 +1,3 @@
-_ = require 'underscore'
 Backbone = require 'backbone'
 ProductContainer = require './ProductContainer.coffee'
 
@@ -25,3 +24,5 @@ class ProductsContainer extends Backbone.View
 
   _getTemplateData: ->
     {products: @model}
+
+module.exports = ProductsContainer

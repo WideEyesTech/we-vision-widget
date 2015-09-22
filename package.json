@@ -4,19 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-<<<<<<< HEAD
-    "postinstall": "node_modules/.bin/bower install",
-    "start": "npm run build && npm run serve",
-    "dev": "node start-dev.js",
-    "internal-build": "node watch.js once && node_modules/.bin/r.js -o baseUrl=js mainConfigFile=js/main.js name=main out=build/main.js paths.requireLib=vendor/requirejs/require include=requireLib optimize=none && uglifyjs --compress --mangle --comments --output build/weVisionWidget_internal.min.js build/main.js js/vendor/iframe-resizer/src/iframeResizer.contentWindow.js && rm build/main.js && cleancss -o build/weVisionWidget_internal.min.css js/css/*",
-    "external-build": "uglifyjs --compress --mangle --output build/weVisionWidget_external.min.js js/we-widget.js js/vendor/iframe-resizer/src/iframeResizer.js",
-    "build": "npm run internal-build && npm run external-build",
-    "build-debug": "node watch.js once && node_modules/.bin/r.js -o baseUrl=js mainConfigFile=js/main.js name=main out=build/main_debug.js paths.requireLib=vendor/requirejs/require include=requireLib optimize=none",
-    "serve": "node server.js"
-=======
     "build": "gulp webpack",
     "test": "wdio"
->>>>>>> 389664fa5207826a8d50ebee37d469cf704ffe94
   },
   "author": "Miguel Pousa <miguelpousafreire@gmail.com> && Gerard Clos <gerard@wide-eyes.it>",
   "private": true,
@@ -41,6 +30,12 @@
     "gulp-clean-css": "~1.0.2",
     "gulp-rename": "~1.2.2",
     "webdriverio": "~3.2.4",
-    "jasmine": "~2.3.2"
+    "jasmine": "~2.3.2",
+    "chai": "~3.3.0",
+    "chai-as-promised": "~5.1.0",
+    "css-loader": "~0.18.0",
+    "style-loader": "~0.12.4",
+    "file-loader": "~0.8.4",
+    "mocha": "~2.3.3"
   }
 }
