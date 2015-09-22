@@ -49,12 +49,6 @@ exports.config = {
     capabilities: [{
         browserName: 'firefox',
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
-    }, {
-        browserName: 'chrome',
-        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
-    },{
-        browserName: 'phantomjs',
-        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
     }],
     //
     // ===================
@@ -135,7 +129,12 @@ exports.config = {
     // Gets executed before test execution begins. At this point you will have access to all global
     // variables like `browser`. It is the perfect place to define custom commands.
     before: function() {
-        // do something
+        var chai = require('chai');
+        var chaiAsPromised = require('chai-as-promised');
+
+        chai.use(chaiAsPromised);
+        expect = chai.expect;
+        chai.Should();
     },
     //
     // Gets executed after all tests are done. You still have access to all global variables from
