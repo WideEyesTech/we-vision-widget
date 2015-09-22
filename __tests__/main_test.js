@@ -29,7 +29,7 @@ describe('main test', function () {
 
     it('should check iframe is loaded with content', function (done) {
       browser
-        .url('/')
+        .url('/index.html')
         .waitForExist('#we-vision-iframe', 5000)
         .then(function (bool) {
           browser.frame('we-vision-iframe')
