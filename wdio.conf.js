@@ -49,6 +49,12 @@ exports.config = {
     capabilities: [{
         browserName: 'firefox',
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+    }, {
+        browserName: 'chrome',
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+    },{
+        browserName: 'phantomjs',
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
     }],
     //
     // ===================
