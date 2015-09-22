@@ -47,7 +47,7 @@ exports.config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [{
-        browserName: 'firefox',
+        browserName: 'chrome',
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
     }],
     //
@@ -70,7 +70,7 @@ exports.config = {
     baseUrl: 'http://localhost:3000',
     //
     // Default timeout for all waitForXXX commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 5000,
     //
     // Initialize the browser instance with a WebdriverIO plugin. The object should have the
     // plugin name as key and the desired plugin options as property. Make sure you have
