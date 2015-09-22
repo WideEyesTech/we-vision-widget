@@ -4,7 +4,6 @@ node_js:
 - '0.11'
 
 before_script:
-  - npm install express
   - ./start_sc_server.sh # start a Web server
   - sleep 5 # give Web server some time to bind to sockets, etc
 
