@@ -50,7 +50,9 @@ exports.config = {
     browserA: {
       desiredCapabilities: {
         browserName: 'chrome',
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
         name: 'we-vision-widget',
+        build: process.env.TRAVIS_BUILD_NUMBER
       }
     },
   },
@@ -71,10 +73,9 @@ exports.config = {
   //
   // Set a base URL in order to shorten url command calls. If your url parameter starts
   // with "/", the base url gets prepended.
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'http://'+ process.env.SAUCE_USERNAME+':'+process.env.SAUCE_ACCESS_KEY+'@ondemand.saucelabs.com:3000/wd/hub',
   //
   // Default timeout for all waitForXXX commands.
-  "idleTimeout": 180,
   waitforTimeout: 10000,
   //
   // Initialize the browser instance with a WebdriverIO plugin. The object should have the
@@ -116,7 +117,7 @@ exports.config = {
   jasmineNodeOpts: {
     //
     // Jasmine default timeout
-    defaultTimeoutInterval: 100000,
+    defaultTimeoutInterval: 10000,
     //
     // The Jasmine framework allows it to intercept each assertion in order to log the state of the application
     // or website depending on the result. For example it is pretty handy to take a screenshot everytime
@@ -142,6 +143,7 @@ exports.config = {
   // Gets executed before test execution begins. At this point you will have access to all global
   // variables like `browser`. It is the perfect place to define custom commands.
   before: function () {
+    console.log(process.env.TRAVIS_JOB_NUMBER);
     console.log(process.env.SAUCE_USERNAME);
     console.log(process.env.SAUCE_ACCESS_KEY);
     // do something
