@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/WideEyesTech/we-vision-widget.svg?branch=master)](https://travis-ci.org/WideEyesTech/we-vision-widget)
 WE Vision Widget - WideEyes We Vision JavaScript Widget
 ==============
 
