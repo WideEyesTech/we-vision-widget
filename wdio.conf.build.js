@@ -73,7 +73,9 @@ exports.config = {
   //
   // Set a base URL in order to shorten url command calls. If your url parameter starts
   // with "/", the base url gets prepended.
-  baseUrl: 'http://' + process.env.SAUCE_USERNAME + ':' + process.env.SAUCE_ACCESS_KEY + '@ondemand.saucelabs.com/wd/hub',
+  baseUrl: 'http://0.0.0.0:3000',
+  host: 'http://' + process.env.SAUCE_USERNAME + ':' + process.env.SAUCE_ACCESS_KEY + '@ondemand.saucelabs.com/wd/hub',
+  port: 80,
   //
   // Default timeout for all waitForXXX commands.
   waitforTimeout: 10000,
