@@ -1,4 +1,5 @@
 we-vision-widget.sublime-project
 we-vision-widget.sublime-workspace
 node_modules/*
+build/*
 .DS_STORE

@@ -12,6 +12,7 @@ notifications:
 
 before_script:
   - npm install -g gulp
+  - npm run build
 
 script:
   - npm run test
