@@ -52,7 +52,7 @@ exports.config = {
         browserName: 'chrome',
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
         name: 'we-vision-widget',
-        captureHtml: true
+        build: process.env.TRAVIS_BUILD_NUMBER
       }
     },
   },
@@ -74,10 +74,9 @@ exports.config = {
   // Set a base URL in order to shorten url command calls. If your url parameter starts
   // with "/", the base url gets prepended.
   baseUrl: 'http://0.0.0.0:3000',
-  host: 'http://' + process.env.SAUCE_USERNAME + ':' + process.env.SAUCE_ACCESS_KEY + '@ondemand.saucelabs.com/wd/hub',
-  port: 80,
   //
   // Default timeout for all waitForXXX commands.
+  "idleTimeout": 180,
   waitforTimeout: 10000,
   //
   // Initialize the browser instance with a WebdriverIO plugin. The object should have the
