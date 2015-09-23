@@ -12,7 +12,7 @@ machine:
 ## Customize dependencies
 dependencies:
   pre:
-    - npm install # install from a different package manager
+    - npm install -g webdriverio
 
   post:
     - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
