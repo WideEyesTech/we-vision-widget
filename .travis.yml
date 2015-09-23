@@ -12,8 +12,6 @@ notifications:
 
 before_script:
   - npm install -g gulp
-  - ./start_sc_server.sh
-  - sleep 3
 
 script:
   - npm run test
