@@ -12,6 +12,7 @@ machine:
 dependencies:
   pre:
     - npm install -g webdriverio
+    - npm install webdriverio jasmine
 
   post:
     - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz

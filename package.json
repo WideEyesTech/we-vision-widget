@@ -32,8 +32,6 @@
     "gulp-rename": "~1.2.2",
     "webdriverio": "~3.2.4",
     "jasmine": "~2.3.2",
-    "chai": "~3.3.0",
-    "chai-as-promised": "~5.1.0",
     "css-loader": "~0.18.0",
     "style-loader": "~0.12.4",
     "file-loader": "~0.8.4",
