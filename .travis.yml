@@ -3,6 +3,12 @@ language: node_js
 node_js:
   - '0.11'
 
+notifications:
+  email:
+    recipients:
+      - gerard@wide-eyes.it
+    on_failure: always
+
 before_script:
   - ./start_sc_server.sh
   - sleep 10

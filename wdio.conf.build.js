@@ -54,7 +54,6 @@ exports.config = {
         'idle-timeout': 30000,
         name: 'lucibus',
         version: 'dev',
-        platform: 'Mac 10.10',
         build: process.env.TRAVIS_BUILD_NUMBER,
         captureHtml: true
       }
