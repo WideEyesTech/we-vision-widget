@@ -50,7 +50,13 @@ exports.config = {
     browserA: {
       desiredCapabilities: {
         browserName: 'chrome',
-        tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+        'idle-timeout': 30000,
+        name: 'lucibus',
+        version: 'dev',
+        platform: 'Mac 10.10',
+        build: process.env.TRAVIS_BUILD_NUMBER,
+        captureHtml: true
       }
     },
   },
@@ -72,7 +78,6 @@ exports.config = {
   // Set a base URL in order to shorten url command calls. If your url parameter starts
   // with "/", the base url gets prepended.
   baseUrl: 'http://localhost:3000',
-  port: 4445,
   //
   // Default timeout for all waitForXXX commands.
   waitforTimeout: 10000,
