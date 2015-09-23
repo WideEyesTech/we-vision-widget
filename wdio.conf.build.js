@@ -50,7 +50,6 @@ exports.config = {
     chrome: {
       desiredCapabilities: {
         browserName: 'chrome',
-        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
         name: 'main',
         build: process.env.TRAVIS_BUILD_NUMBER
       }
