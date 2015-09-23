@@ -50,9 +50,13 @@ exports.config = {
     browserA: {
       desiredCapabilities: {
         browserName: 'chrome',
-        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+        platform: 'MAC',
+        browserConnectionEnabled: true,
+        javascriptEnabled: true,
+        nativeEvents: true,
         name: 'we-vision-widget',
-        build: process.env.TRAVIS_BUILD_NUMBER
+        build: process.env.TRAVIS_BUILD_NUMBER,
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
       }
     },
   },

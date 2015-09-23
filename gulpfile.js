@@ -10,17 +10,26 @@ var server = gulp.src('./')
 
 gulp.task('test:local:e2e', function () {
   return gulp.src('wdio.conf.local.js')
-    .pipe(webdriver());
+    .pipe(webdriver())
+    .once('end', function () {
+      server.emit('kill');
+    });
 })
 
 gulp.task('test:cloud:e2e', function () {
   return gulp.src('wdio.conf.cloud.js')
-    .pipe(webdriver());
+    .pipe(webdriver())
+    .once('end', function () {
+      server.emit('kill');
+    });
 })
 
 gulp.task('test:build:e2e', function () {
   return gulp.src('wdio.conf.build.js')
-    .pipe(webdriver());
+    .pipe(webdriver())
+    .once('end', function () {
+      server.emit('kill');
+    });
 })
 
 gulp.task("build", function () {
