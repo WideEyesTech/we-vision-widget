@@ -4,9 +4,10 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "build": "gulp webpack",
-    "test:local": "wdio wdio.conf.local.js",
-    "test": "wdio wdio.conf.build.js"
+    "build": "gulp build",
+    "test:local": "gulp test:local:e2e",
+    "test:cloud": "gulp test:cloud:e2e",
+    "test": "gulp test:build:e2e"
   },
   "author": "Miguel Pousa <miguelpousafreire@gmail.com> && Gerard Clos <gerard@wide-eyes.it>",
   "private": true,
@@ -30,12 +31,11 @@
     "gulp-webpack": "~1.5.0",
     "gulp-clean-css": "~1.0.2",
     "gulp-rename": "~1.2.2",
-    "webdriverio": "~3.2.4",
     "jasmine": "~2.3.2",
     "css-loader": "~0.18.0",
     "style-loader": "~0.12.4",
     "file-loader": "~0.8.4",
-    "express": "~4.13.3",
-    "supertest": "~1.1.0"
+    "gulp-webserver": "~0.9.1",
+    "gulp-webdriver": "~1.0.1"
   }
 }

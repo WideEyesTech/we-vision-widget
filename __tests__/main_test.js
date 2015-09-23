@@ -4,22 +4,13 @@ describe('main test', function () {
       .getTitle().then(function (title) {
         expect(title).toEqual("WE Widget Test Page");
       })
-      .call(done);
-    //   browser
-    //     .url('/')
-    //     .waitForExist('#we-vision-iframe', 20000)
-    //     .then(function (bool) {
-    //       browser.frame('we-vision-iframe')
-    //         .then(function () {
-    //           browser
-    //             .waitForExist('.card', 20000)
-    //             .isExisting('.card')
-    //               .then(function (bool) {
-    //                 expect(bool).toBe(true);
-    //               })
-    //               .call(done);
-    //         });
-    //     });
-    // });
+      .waitForExist('#we-vision-iframe', 5000)
+      .frame('we-vision-iframe')
+      .waitForExist('.card', 5000)
+      .isExisting('.card')
+        .then(function (bool) {
+          expect(bool).toBe(true);
+        })
+        .call(done);
   });
 });
