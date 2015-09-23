@@ -3,7 +3,7 @@ var app = null;
 
 app = express();
 app.get('/');
-var server = app.listen(3000, '0.0.0.0',
+var server = app.listen(3000, 'localhost',
   function () {
     var host = server.address().address;
     var port = server.address().port;
