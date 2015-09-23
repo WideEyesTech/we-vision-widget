@@ -38,7 +38,6 @@
     "css-loader": "~0.18.0",
     "style-loader": "~0.12.4",
     "file-loader": "~0.8.4",
-    "mocha": "~2.3.3",
     "express": "~4.13.3",
     "supertest": "~1.1.0"
   }
