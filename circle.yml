@@ -1,0 +1,10 @@
+dependencies:
+  post:
+    - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
+    - tar -xzf sc-latest-linux.tar.gz
+
+test:
+  override:
+    - cd sc-*-linux && ./bin/sc -u gecloswideeyes -k 736d5998-b9b4-40de-816f-b992dc9accc9:
+    - ./start_sc_server.sh
+    - wdio wdio.conf.build.js

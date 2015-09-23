@@ -7,7 +7,7 @@
     "build": "gulp webpack",
     "test:local": "wdio wdio.conf.local.js",
     "test:cloud": "wdio wdio.conf.cloud.js",
-    "test:build": "wdio wdio.conf.build.js"
+    "test": "wdio wdio.conf.build.js"
   },
   "author": "Miguel Pousa <miguelpousafreire@gmail.com> && Gerard Clos <gerard@wide-eyes.it>",
   "private": true,

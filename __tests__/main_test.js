@@ -10,7 +10,7 @@ describe('main test', function () {
               .waitForExist('.card', 10000)
               .isExisting('.card')
                 .then(function (bool) {
-                  expect(bool).toBe(false);
+                  expect(bool).toBe(true);
                 })
                 .call(done);
           });
