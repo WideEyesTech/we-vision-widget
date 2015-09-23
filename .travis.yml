@@ -14,7 +14,7 @@ before_script:
   - sleep 10
 
 script:
-  - npm run test:build
+  - npm run test
 
 branches:
   only:
