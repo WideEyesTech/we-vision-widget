@@ -142,7 +142,6 @@ exports.config = {
   // Gets executed before test execution begins. At this point you will have access to all global
   // variables like `browser`. It is the perfect place to define custom commands.
   before: function () {
-    console.log(process.env.TRAVIS_JOB_NUMBER);
     console.log(process.env.SAUCE_USERNAME);
     console.log(process.env.SAUCE_ACCESS_KEY);
     // do something

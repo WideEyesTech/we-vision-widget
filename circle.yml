@@ -23,6 +23,7 @@ test:
   override:
     - cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY:
         background: true
+    - sleep 30
     - ./start_sc_server.sh
     - sleep 5
     - npm run test
