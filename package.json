@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "build": "gulp webpack",
-    "test:local": "selenium-standalone start & node server.js & wdio wdio.conf.local.js",
-    "test:cloud": "node server.js & wdio wdio.conf.cloud.js",
+    "test:local": "wdio wdio.conf.local.js",
+    "test:cloud": "wdio wdio.conf.cloud.js",
     "test:build": "wdio wdio.conf.build.js"
   },
   "author": "Miguel Pousa <miguelpousafreire@gmail.com> && Gerard Clos <gerard@wide-eyes.it>",
