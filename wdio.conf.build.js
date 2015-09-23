@@ -76,7 +76,7 @@ exports.config = {
   baseUrl: 'http://localhost:3000',
   //
   // Default timeout for all waitForXXX commands.
-  waitforTimeout: 20000,
+  waitforTimeout: 10000,
   //
   // Initialize the browser instance with a WebdriverIO plugin. The object should have the
   // plugin name as key and the desired plugin options as property. Make sure you have
@@ -117,13 +117,13 @@ exports.config = {
   jasmineNodeOpts: {
     //
     // Jasmine default timeout
-    defaultTimeoutInterval: 20000,
+    defaultTimeoutInterval: 10000,
     //
     // The Jasmine framework allows it to intercept each assertion in order to log the state of the application
     // or website depending on the result. For example it is pretty handy to take a screenshot everytime
     // an assertion fails.
     expectationResultHandler: function (passed, assertion) {
-      // do something
+      browser.screenshot();
     }
   },
 

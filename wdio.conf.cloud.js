@@ -35,8 +35,6 @@ exports.config = {
 
   capabilities: [{
     browserName: 'chrome'
-  }, {
-    browserName: 'firefox'
   }],
   //
   // ===================
@@ -95,10 +93,18 @@ exports.config = {
   reporter: 'dot',
 
   //
-  // Options to be passed to Mocha.
-  // See the full list at http://mochajs.org/
-  mochaOpts: {
-    ui: 'bdd'
+  // Options to be passed to Jasmine.
+  jasmineNodeOpts: {
+    //
+    // Jasmine default timeout
+    defaultTimeoutInterval: 10000,
+    //
+    // The Jasmine framework allows it to intercept each assertion in order to log the state of the application
+    // or website depending on the result. For example it is pretty handy to take a screenshot everytime
+    // an assertion fails.
+    expectationResultHandler: function (passed, assertion) {
+      // do something
+    }
   },
 
   //
