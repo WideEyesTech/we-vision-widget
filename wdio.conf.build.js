@@ -50,11 +50,7 @@ exports.config = {
     browserA: {
       desiredCapabilities: {
         browserName: 'chrome',
-        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
-        'idle-timeout': 30000,
-        name: 'lucibus',
-        version: 'dev',
-        build: process.env.TRAVIS_BUILD_NUMBER,
+        name: 'we-vision-widget',
         captureHtml: true
       }
     },

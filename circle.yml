@@ -5,6 +5,10 @@ dependencies:
 
 test:
   override:
-    - cd sc-*-linux && ./bin/sc -u gecloswideeyes -k 736d5998-b9b4-40de-816f-b992dc9accc9:
+    - ./bin/sc -u gecloswideeyes -k 736d5998-b9b4-40de-816f-b992dc9accc9 -f ~/sc_ready:
+        background: true
+        pwd: sc-*-linux
+    # Wait for tunnel to SauceLabs to be ready
+    - while [ ! -e ~/sc_ready ]; do sleep 1; done
     - ./start_sc_server.sh
-    - wdio wdio.conf.build.js
+    - npm run test
