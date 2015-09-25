@@ -74,8 +74,7 @@ exports.config = {
     browserC: {
       desiredCapabilities: {
         browserName: 'internet explorer',
-        version: '10',
-        platform: 'WINDOWS',
+        version: '10.0',
         name: 'we-vision-widget',
         nativeEvents: true,
         javascriptEnabled: true,
