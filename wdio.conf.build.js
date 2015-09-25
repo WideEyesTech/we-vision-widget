@@ -50,7 +50,6 @@ exports.config = {
     browserA: {
       desiredCapabilities: {
         browserName: 'chrome',
-        platform: 'MAC',
         name: 'we-vision-widget',
         nativeEvents: true,
         javascriptEnabled: true,
@@ -63,7 +62,6 @@ exports.config = {
     // browserB: {
     //   desiredCapabilities: {
     //     browserName: 'firefox',
-    //     platform: 'MAC',
     //     name: 'we-vision-widget',
     //     nativeEvents: true,
     //     javascriptEnabled: true,
