@@ -3,3 +3,4 @@ we-vision-widget.sublime-workspace
 node_modules/*
 build/*
 .DS_STORE
+deploy.sh
