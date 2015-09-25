@@ -1,6 +1,6 @@
 var gulp = require("gulp");
 var webserver = require("gulp-webserver");
-var webpackGulp = require("gulp-webpack");
+var webpackGulp = require("webpack-stream");
 var webdriver = require('gulp-webdriver');
 var server;
 
