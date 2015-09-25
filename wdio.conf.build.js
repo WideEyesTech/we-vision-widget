@@ -80,19 +80,19 @@ exports.config = {
         build: process.env.TRAVIS_BUILD_NUMBER,
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
       }
+    },
+    browserD: {
+      desiredCapabilities: {
+        browserName: 'safari',
+        platform: 'MAC',
+        name: 'we-vision-widget',
+        nativeEvents: true,
+        javascriptEnabled: true,
+        browserConnectionEnabled: true,
+        build: process.env.TRAVIS_BUILD_NUMBER,
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
+      }
     }
-    // browserD: {
-    //   desiredCapabilities: {
-    //     browserName: 'safari',
-    //     platform: 'MAC',
-    //     name: 'we-vision-widget',
-    //     nativeEvents: true,
-    //     javascriptEnabled: true,
-    //     browserConnectionEnabled: true,
-    //     build: process.env.TRAVIS_BUILD_NUMBER,
-    //     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
-    //   }
-    // }
   },
   //
   // ===================
