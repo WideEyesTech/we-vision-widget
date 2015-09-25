@@ -58,43 +58,44 @@ exports.config = {
         build: process.env.TRAVIS_BUILD_NUMBER,
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
       }
-    },
-    browserB: {
-      desiredCapabilities: {
-        browserName: 'firefox',
-        platform: 'MAC',
-        name: 'we-vision-widget',
-        nativeEvents: true,
-        javascriptEnabled: true,
-        browserConnectionEnabled: true,
-        build: process.env.TRAVIS_BUILD_NUMBER,
-        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
-      }
-    },
-    browserC: {
-      desiredCapabilities: {
-        browserName: 'internet explorer',
-        version: '10.0',
-        name: 'we-vision-widget',
-        nativeEvents: true,
-        javascriptEnabled: true,
-        browserConnectionEnabled: true,
-        build: process.env.TRAVIS_BUILD_NUMBER,
-        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
-      }
-    },
-    browserD: {
-      desiredCapabilities: {
-        browserName: 'safari',
-        platform: 'MAC',
-        name: 'we-vision-widget',
-        nativeEvents: true,
-        javascriptEnabled: true,
-        browserConnectionEnabled: true,
-        build: process.env.TRAVIS_BUILD_NUMBER,
-        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
-      }
     }
+    // ,
+    // browserB: {
+    //   desiredCapabilities: {
+    //     browserName: 'firefox',
+    //     platform: 'MAC',
+    //     name: 'we-vision-widget',
+    //     nativeEvents: true,
+    //     javascriptEnabled: true,
+    //     browserConnectionEnabled: true,
+    //     build: process.env.TRAVIS_BUILD_NUMBER,
+    //     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
+    //   }
+    // },
+    // browserC: {
+    //   desiredCapabilities: {
+    //     browserName: 'internet explorer',
+    //     version: '10.0',
+    //     name: 'we-vision-widget',
+    //     nativeEvents: true,
+    //     javascriptEnabled: true,
+    //     browserConnectionEnabled: true,
+    //     build: process.env.TRAVIS_BUILD_NUMBER,
+    //     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
+    //   }
+    // },
+    // browserD: {
+    //   desiredCapabilities: {
+    //     browserName: 'safari',
+    //     platform: 'MAC',
+    //     name: 'we-vision-widget',
+    //     nativeEvents: true,
+    //     javascriptEnabled: true,
+    //     browserConnectionEnabled: true,
+    //     build: process.env.TRAVIS_BUILD_NUMBER,
+    //     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
+    //   }
+    // }
   },
   //
   // ===================
