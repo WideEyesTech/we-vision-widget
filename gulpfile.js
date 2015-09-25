@@ -4,7 +4,7 @@ var webpackGulp = require("webpack-stream");
 var webdriver = require('gulp-webdriver');
 var server;
 
-gulp.task('webserver', function () {
+gulp.task('webserver', ['build'], function () {
   return server = gulp.src('./')
     .pipe(webserver({
       port: 3000,
