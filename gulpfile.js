@@ -4,12 +4,12 @@ var webpackGulp = require("gulp-webpack");
 var webdriver = require('gulp-webdriver');
 var server;
 
-gulp.task('webserver', function() {
+gulp.task('webserver', function () {
   return server = gulp.src('./')
-  .pipe(webserver({
-    port: 3000,
-    fallback: 'index.html'
-  }));
+    .pipe(webserver({
+      port: 3000,
+      fallback: 'index.html'
+    }));
 })
 
 gulp.task('test:local:e2e', ['webserver'], function () {
