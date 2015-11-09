@@ -1,9 +1,8 @@
 [![Build Status](https://travis-ci.org/WideEyesTech/we-vision-widget.svg?branch=master)](https://travis-ci.org/WideEyesTech/we-vision-widget)
-WE Vision Widget MASSIMO - WideEyes We Vision JavaScript Widget for Massimo Dutti
+WE Vision Widget - WideEyes We Vision JavaScript
 ==============
 
 A library to dinamically generate a widget that can be embedded in a website and connect to our [web services](http://docs.wide-eyes.it) to retrieve search results.
-This is a specially tailored fork for Massimo Dutti from the same library available at [Github](https://github.com/WideEyesTech/we-vision-widget)
 
 Table of Contents
 =================

@@ -69,7 +69,8 @@ class WeVisionWidget
 			else if config.mode == 'production' or !config.mode
 				response = JSON.stringify response
 				config = JSON.stringify(config)
-				we_vision_internal_src = '/build/we_vision_internal.min.js'
+				# we_vision_internal_src = '/build/we_vision_internal.min.js'
+				we_vision_internal_src = 'https://d7ljuhq7463v2.cloudfront.net/client-files/183/current/we_vision_internal.min.js'
 				html =
 					'<!DOCTYPE html>
 					<html>
