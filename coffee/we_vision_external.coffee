@@ -1,5 +1,6 @@
 if typeof iFrameResize is 'undefined' then require '../js/vendor/iframe-resizer/src/iframeResizer'
 
+
 class WeVisionWidget
 	API_URL = 'http://api.wide-eyes.it'
 	config = window.we_vision_config
@@ -8,10 +9,21 @@ class WeVisionWidget
 
 	constructor: () ->
 		# get script source
+		self = @
 		script = document.getElementById 'we-vision-script'
 		scriptSrc = script.getAttribute 'src'
 		scriptSrc = scriptSrc.substring 0, scriptSrc.lastIndexOf('/')
-		product_id = @getProductId()
+		inter = window.setInterval () ->
+			cont = document.getElementById('product-main-images')
+			if cont
+				self.addEventListeners cont.children[0]
+				self.continue cont.children[0], scriptSrc
+				clearInterval(inter)
+			100
+
+	continue: (img) ->
+		self = @
+		product_id = @getProductId(img)
 
 		data =
 			ProductId: product_id
@@ -19,17 +31,17 @@ class WeVisionWidget
 		@getProducts product_id, (err, response) ->
 			if err
 				return
-			@iframe = document.createElement 'iframe'
-			@iframe.setAttribute 'width', '100%'
-			@iframe.setAttribute 'id', 'we-vision-iframe'
-			@iframe.setAttribute 'seamless', true
-			@iframe.setAttribute 'frameborder', 'no'
-			@iframe.setAttribute 'scrolling', 'no'
+			self.iframe = document.createElement 'iframe'
+			self.iframe.setAttribute 'width', '100%'
+			self.iframe.setAttribute 'id', 'we-vision-iframe'
+			self.iframe.setAttribute 'seamless', true
+			self.iframe.setAttribute 'frameborder', 'no'
+			self.iframe.setAttribute 'scrolling', 'no'
 
 			widget = document.querySelector config.widgetContainer
-			widget.appendChild @iframe
+			widget.appendChild self.iframe
 
-			iFrameResize({checkOrigin: false}, @iframe)
+			iFrameResize({checkOrigin: false}, self.iframe)
 
 			if config.mode == 'debug'
 				# have to be stringified so to pass it to the html string
@@ -77,16 +89,35 @@ class WeVisionWidget
 					</html>'
 
 			# copy html to iframe
-			@iframe.contentWindow.document.open()
-			@iframe.contentWindow.document.write html
-			@iframe.contentWindow.document.close()
+			self.iframe.contentWindow.document.open()
+			self.iframe.contentWindow.document.write html
+			self.iframe.contentWindow.document.close()
+
+	addEventListeners: (img) ->
+		self = @
+		img.addEventListener 'load', () ->
+			id = self.getProductId img
+			self.getProducts id, (err, response) ->
+				if err
+					false
+				else
+					self.postMessage {
+						name: "we-reload",
+						data: {
+							products: response
+						}
+					}
 
 	postMessage: (msg) ->
 		@iframe.contentWindow.postMessage(msg, "*");
 
-	getProductId:  () ->
-		idCont = document.querySelector config.productIdContainer
-		id = idCont.innerHTML
+	getProductId:  (img) ->
+		s = img.src
+		b = s.indexOf('2015')
+		e = s.indexOf('jpg') + 3
+		id = s.slice(b, e)
+		# idCont = document.querySelector config.productIdContainer
+		# id = idCont.innerHTML
 
 	getProducts:  (id, callback) ->
 		if id isnt @lastIdSearch
