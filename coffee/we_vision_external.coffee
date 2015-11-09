@@ -12,7 +12,7 @@ class WeVisionWidget
 		script = document.getElementById 'we-vision-script'
 		scriptSrc = script.getAttribute 'src'
 		scriptSrc = scriptSrc.substring 0, scriptSrc.lastIndexOf('/')
-		product_id = @getProductId(img)
+		product_id = @getProductId()
 
 		data =
 			ProductId: product_id
@@ -86,7 +86,7 @@ class WeVisionWidget
 	postMessage: (msg) ->
 		@iframe.contentWindow.postMessage(msg, "*");
 
-	getProductId:  (img) ->
+	getProductId:  () ->
 		idCont = document.querySelector config.productIdContainer
 		id = idCont.innerHTML
 
