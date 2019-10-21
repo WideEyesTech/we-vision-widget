@@ -12,7 +12,7 @@
   "author": "Miguel Pousa <miguelpousafreire@gmail.com> && Gerard Clos <gerard@wide-eyes.it>",
   "private": true,
   "dependencies": {
-    "handlebars": "~2.0.0",
+    "handlebars": "~4.4.5",
     "jquery": "~2.1.4",
     "backbone": "~1.2.3",
     "eventjs": "~4.0.2"
